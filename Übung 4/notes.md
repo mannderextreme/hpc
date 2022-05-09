@@ -18,3 +18,4 @@ finished ASIMD microbenchmarks
 
 Task 2: Benchmarking SVE instructions
 
+Ich habe leider die SVE Instruktionen nicht zum laufen gebracht. Deswegen gibt es jetzt auch nichts zu vergleichen. gcc hatte nicht funktioniert und ich habe armclang? versucht. 

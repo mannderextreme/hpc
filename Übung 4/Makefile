@@ -9,7 +9,7 @@ micro_asimd: driver_asimd.cpp kernels/peak_asimd_fmadd_sp.s kernels/peak_asimd_f
 micro_sve: kernels/peak_sve_fmla_sp.s kernels/peak_sve_fmla_dp.s
 		gcc -pedantic -Wall -Wextra -Werror -c kernels/peak_sve_fmla_sp.s -o ${BUILD_DIR}/peak_sve_fmla_sp.o
 		gcc -pedantic -Wall -Wextra -Werror -c kernels/peak_sve_fmla_dp.s -o ${BUILD_DIR}/peak_sve_fmla_dp.o
-		g++ -pedantic -Wall -Wextra -Werror -O2 -fopenmp driver_sve.cpp ${BUILD_DIR}/peak_sve_fmla_sp.o ${BUILD_DIR}/peak_sve_fmla_dp.o -o ${BUILD_DIR}/micro_sve
+		g++ -pedantic -Wall -Wextra -Werror -O3 -fopenmp driver_sve.cpp ${BUILD_DIR}/peak_sve_fmla_sp.o ${BUILD_DIR}/peak_sve_fmla_dp.o -o ${BUILD_DIR}/micro_sve
 all: micro_asimd micro_sve
 
 $(shell mkdir -p build)
