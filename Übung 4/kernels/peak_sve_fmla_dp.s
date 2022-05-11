@@ -3,7 +3,7 @@
         .global peak_sve_fmla_dp
         /*
          * Microbenchmark measuring achievable performance using fmla instructions.
-         * Repeats 22 independent DP SVE-FMAs.
+         * Repeats 22 independent DP ASIMD-FMAs.
          * @param x0 number of repetitions.
          * @return number of flops per iteration.
          */ 
