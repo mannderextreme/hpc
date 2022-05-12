@@ -1,5 +1,5 @@
 # Task 5.2:
-
+Anzahl der FLOPs pro Matrix = 2*m*n*k
 
 Matrix Size: 4
 Avg. calc time: 1.36835e-06
