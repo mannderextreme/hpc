@@ -1,5 +1,6 @@
 #include <cstdint>
 #include <cstdlib>
+#include "copy.h"
 
 extern "C" {
   void copy_asm( uint32_t const * i_a,

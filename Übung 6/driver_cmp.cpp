@@ -1,16 +1,13 @@
 #include <cstdint>
-#include <iostream>
-#include <bitset>
+#include <cstdlib>
 
 
 extern "C"{
-    void hello_world_asm();
     uint64_t compare_asm(   uint32_t i_a,
                             uint32_t i_b);
 }
 
-int main(   int    i_argc,
-            char * i_argv[]){
+int main(){
 
 
     uint32_t l_a    = 10;

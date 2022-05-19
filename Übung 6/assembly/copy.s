@@ -22,7 +22,7 @@ copy_asm:
         ldp w2, w3,   [x0,  #0]
         ldp w4, w5,   [x0,  #8]
         ldp w6, w7,   [x0, #16]
-        ldr w8        [x0, #24]
+        ldr w8,       [x0, #24]
         
         //storing whole 64 bit registers, offsets change
         str x8,       [x1, #48]
@@ -39,4 +39,4 @@ copy_asm:
         ldp x19, x20, [sp], #16
 
         ret
-        .size gemm_asm_gp, (. - gemm_asm_gp)
+        .size copy_asm, (. - copy_asm)
