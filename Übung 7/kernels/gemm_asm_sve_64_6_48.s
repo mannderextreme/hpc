@@ -29,11 +29,7 @@ gemm_asm_sve_64_6_48:
 
         // your matrix kernel goes here!
 
-        mov x15, #47
-
-loop:   
-        cmp c15, #0
-        beq exit
+     
 
         // load C
         ldr z0, [x2] 
@@ -91,10 +87,11 @@ loop:
         sub x2, x2, #23*16*4
         
 
-        /
+        mov x15, #47
 
 loop:   
-        cmp c15, #0
+       
+        cmp x15, #0
         beq exit
 
         //load B
@@ -232,3 +229,4 @@ exit:
 
         ret
         .size gemm_asm_sve_64_6_1, (. - gemm_asm_sve_64_6_48)
+
