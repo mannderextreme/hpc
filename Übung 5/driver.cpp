@@ -39,7 +39,7 @@ int main(){
 
         for ( uint64_t i = 0; i < l_iterator; i++){
             for ( uint64_t j = 0; j < l_iterator; j++){
-                i_a[i * i_lda + j]  = 0.1;
+                i_a[i * i_lda + j]  = 0.0;
                 i_b[i * i_ldb + j]  = 0.1;
                 io_c[i * i_ldc + j] = 0.0;
             }
