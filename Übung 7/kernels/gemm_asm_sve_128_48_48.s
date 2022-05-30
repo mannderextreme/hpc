@@ -234,6 +234,9 @@ loop_k:
         cbnz x16, loop_m
 
         //prepare pointers for next n iteration
+        x2
+        x1
+        x0
         cbnz x17, loop_n
 
         // restore
