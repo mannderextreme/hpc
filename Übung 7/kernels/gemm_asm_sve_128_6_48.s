@@ -88,7 +88,7 @@ loop_m:
         add x2, x2, #16*4
         ldr z23, [x2] 
         //totally unnecessary but for better understanding 
-        add x2, x2, #16*4
+        add x2, x2, #16*4 + 16*4*4
 
         //jump back to start 
         sub x2, x2, #128*6*4
@@ -141,7 +141,9 @@ loop_k:
         ldr z30, [x0]
         add x0, x0, #16*4
         ldr z31, [x0]
-        add x0, x0, #16*4
+        //jump by leading dimension
+        add x0, x0, #16*4 + 64*4
+
 
         fmla z2.s,  p0/m, z24.s, z30.s
         fmla z6.s,  p0/m, z25.s, z30.s
@@ -214,10 +216,14 @@ loop_k:
         str z23, [x2] 
         add x2, x2, #16*4 + 16*4*4
 
-        sub x2, x2, #128*6*4
     	
-        // set pointer to "second block"
+        // prepare pointers for next iteration
+        sub x2, x2, #128*6*4
         add x2, x2, #64*4
+
+        sub x0, x0, #128*48*4
+        add x2, x2, #64*4
+        
 
 
         cbnz x16, loop_m
