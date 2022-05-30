@@ -125,7 +125,7 @@ TEST_CASE("Checking correctness of 64_6_48 kernel a = {1.0}, b = {1/48} "){
 
         for( int i = 0; i < 64*6; i++ ){
             
-            std::cout << c[i] << std::endl;
+            
             sum  += c[i];
 
             
@@ -224,7 +224,7 @@ TEST_CASE("Checking correctness of 128_6_48 kernel a = {.5}, b = {2}"){
 
         for( int i = 0; i < 128*6; i++ ){
             
-
+            std::cout << c[i] << std::endl;
             sum  += c[i];
 
             

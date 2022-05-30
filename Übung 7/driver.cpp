@@ -14,6 +14,9 @@ extern "C" {
         void gemm_asm_sve_128_6_48( float * i_a,
                                     float * i_b,
                                     float * io_c);
+        void gemm_asm_sve_128_48_48( float * i_a,
+                                    float * i_b,
+                                    float * io_c);
         
 }
 int main(){
@@ -44,9 +47,10 @@ int main(){
         l_sus_g_flops *= 64 * 6 * 1 * 2;
         l_sus_g_flops *= 1.0E-9;
         l_sus_g_flops /= l_dur.count(); 
-
+        std::cout << "Repetitions: " << l_n_repetitions  << std::endl;
         std::cout << "Calculation time: " << l_dur.count()  << std::endl;
         std::cout << "Sustained GFLOPS: " << l_sus_g_flops << std::endl << std::endl;
+
 
         free(i_a);
         free(i_b);
@@ -76,7 +80,7 @@ int main(){
         l_sus_g_flops *= 64 * 6 * 48 * 2;
         l_sus_g_flops *= 1.0E-9;
         l_sus_g_flops /= l_dur.count(); 
-
+        std::cout << "Repetitions: " << l_n_repetitions  << std::endl;
         std::cout << "Calculation time: " << l_dur.count()  << std::endl;
         std::cout << "Sustained GFLOPS: " << l_sus_g_flops << std::endl << std::endl;
 
@@ -85,7 +89,7 @@ int main(){
         free(i_b);
         free(io_c);
 
-         l_n_repetitions = l_n_repetitions;
+        l_n_repetitions = l_n_repetitions;
 
         l_sus_g_flops = l_n_repetitions; 
 
@@ -108,7 +112,7 @@ int main(){
         l_sus_g_flops *= 128 * 6 * 48 * 2;
         l_sus_g_flops *= 1.0E-9;
         l_sus_g_flops /= l_dur.count(); 
-
+        std::cout << "Repetitions: " << l_n_repetitions  << std::endl;
         std::cout << "Calculation time: " << l_dur.count()  << std::endl;
         std::cout << "Sustained GFLOPS: " << l_sus_g_flops << std::endl << std::endl;
 
@@ -128,7 +132,7 @@ int main(){
         std::cout << "running GEMM 128_6_48 benchmarks" << std::endl << std::endl;
         l_tp0 = std::chrono::high_resolution_clock::now();
         for (uint64_t l_j = 0; l_j < l_n_repetitions; l_j++){
-                gemm_asm_sve_128_6_48(   i_a,
+                gemm_asm_sve_128_48_48(   i_a,
                                         i_b,
                                         io_c);
         }
@@ -140,7 +144,7 @@ int main(){
         l_sus_g_flops *= 128 * 6 * 48 * 2;
         l_sus_g_flops *= 1.0E-9;
         l_sus_g_flops /= l_dur.count(); 
-
+        std::cout << "Repetitions: " << l_n_repetitions  << std::endl;
         std::cout << "Calculation time: " << l_dur.count()  << std::endl;
         std::cout << "Sustained GFLOPS: " << l_sus_g_flops << std::endl << std::endl;
 

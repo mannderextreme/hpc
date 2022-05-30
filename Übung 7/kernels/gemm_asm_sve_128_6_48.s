@@ -87,11 +87,9 @@ loop_m:
         ldr z22, [x2] 
         add x2, x2, #16*4
         ldr z23, [x2] 
-        //totally unnecessary but for better understanding 
-        add x2, x2, #16*4 + 16*4*4
 
-        //jump back to start 
-        sub x2, x2, #128*6*4
+        sub x2, x2, #5*8*16*4 + 3*16*4
+
         
 
         mov x15, #48
@@ -214,15 +212,14 @@ loop_k:
         str z22, [x2] 
         add x2, x2, #16*4
         str z23, [x2] 
-        add x2, x2, #16*4 + 16*4*4
 
     	
         // prepare pointers for next iteration
-        sub x2, x2, #128*6*4
+        sub x2, x2, #5*8*16*4 + 3*16*4
         add x2, x2, #64*4
-
+        sub x1, x1, #48*4
         sub x0, x0, #128*48*4
-        add x2, x2, #64*4
+        add x0, x0, #64*4
         
 
 
