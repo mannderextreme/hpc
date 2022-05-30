@@ -3,7 +3,7 @@
         .global gemm_asm_sve_64_6_48
         /*
          * Performs the matrix-multiplication C+=A*B
-         * with the shapes (64x6) = (64x1) * (1x6).
+         * with the shapes (64x6) = (64x48) * (48x6).
          * The input-data is of type float.
          *
          * @param x0 pointer to A.
@@ -87,12 +87,11 @@ gemm_asm_sve_64_6_48:
         sub x2, x2, #23*16*4
         
 
-        mov x15, #47
+        mov x15, #48
 
 loop:   
-       
-        cmp x15, #0
-        beq exit
+
+        sub x15, x15, #1
 
         //load B
         ld1rw {z24.s}, p0/z, [x1]
@@ -106,13 +105,13 @@ loop:
         ld1rw {z28.s}, p0/z, [x1]
         add x1, x1, #4*48
         ld1rw {z29.s}, p0/z, [x1]
-        sub x1, x1, #5*4*48+1
+        sub x1, x1, #5*4*48-4
 
 
-        //load first 16 values of A
+        //load first 32 values of A
         ldr z30, [x0]
         add x0, x0, #16*4
-        ldr z30, [x0]
+        ldr z31, [x0]
         add x0, x0, #16*4
 
         //do calculations
@@ -131,10 +130,10 @@ loop:
         fmla z17.s, p0/m, z28.s, z31.s
         fmla z21.s, p0/m, z29.s, z31.s
 
-        //load second 16 values of A
+        //load second 32 values of A
         ldr z30, [x0]
         add x0, x0, #16*4
-        ldr z30, [x0]
+        ldr z31, [x0]
         add x0, x0, #16*4
 
         fmla z2.s,  p0/m, z24.s, z30.s
@@ -151,11 +150,7 @@ loop:
         fmla z19.s, p0/m, z28.s, z31.s
         fmla z23.s, p0/m, z29.s, z31.s
 
-        b loop
-
-exit:
-
-
+        cbnz x15, loop
 
         //store C
         str z0, [x2] 
@@ -228,5 +223,5 @@ exit:
         // mov x0, 16*48
 
         ret
-        .size gemm_asm_sve_64_6_1, (. - gemm_asm_sve_64_6_48)
+        .size gemm_asm_sve_64_6_48, (. - gemm_asm_sve_64_6_48)
 
