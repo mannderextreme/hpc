@@ -1,16 +1,16 @@
-       .text
-        .type gemm_asm_sve_64_6_1, %function
-        .global gemm_asm_sve_64_6_1
+.text
+        .type gemm_asm_sve_128_48_48, %function
+        .global gemm_asm_sve_128_48_48
         /*
          * Performs the matrix-multiplication C+=A*B
-         * with the shapes (64x6) = (64x1) * (1x6).
+         * with the shapes (64x6) = (64x48) * (48x6).
          * The input-data is of type float.
          *
          * @param x0 pointer to A.
          * @param x1 pointer to B.
          * @param x2 pointer to C.
          */ 
-gemm_asm_sve_64_6_1:
+gemm_asm_sve_128_48_48:
         // set predicate register to true
         ptrue p0.b
 
@@ -29,6 +29,15 @@ gemm_asm_sve_64_6_1:
 
         // your matrix kernel goes here!
 
+
+        mov x17, #8
+loop_n:
+        sub x17, x17, #1
+        
+        mov x16, #2
+loop_m:
+        sub x16, x16, #1
+
         // load C
         ldr z0, [x2] 
         add x2, x2, #16*4
@@ -37,7 +46,8 @@ gemm_asm_sve_64_6_1:
         ldr z2, [x2] 
         add x2, x2, #16*4
         ldr z3, [x2] 
-        add x2, x2, #16*4
+        // jump by leading dimension 
+        add x2, x2, #16*4 + 16*4*4
 
         ldr z4, [x2] 
         add x2, x2, #16*4
@@ -46,7 +56,7 @@ gemm_asm_sve_64_6_1:
         ldr z6, [x2] 
         add x2, x2, #16*4
         ldr z7, [x2] 
-        add x2, x2, #16*4
+        add x2, x2, #16*4 + 16*4*4
         
         ldr z8, [x2] 
         add x2, x2, #16*4
@@ -55,7 +65,7 @@ gemm_asm_sve_64_6_1:
         ldr z10, [x2] 
         add x2, x2, #16*4
         ldr z11, [x2] 
-        add x2, x2, #16*4
+        add x2, x2, #16*4 + 16*4*4
         
         ldr z12, [x2] 
         add x2, x2, #16*4
@@ -64,7 +74,7 @@ gemm_asm_sve_64_6_1:
         ldr z14, [x2] 
         add x2, x2, #16*4
         ldr z15, [x2] 
-        add x2, x2, #16*4
+        add x2, x2, #16*4 + 16*4*4
         
         ldr z16, [x2] 
         add x2, x2, #16*4
@@ -73,7 +83,7 @@ gemm_asm_sve_64_6_1:
         ldr z18, [x2] 
         add x2, x2, #16*4
         ldr z19, [x2] 
-        add x2, x2, #16*4
+        add x2, x2, #16*4 + 16*4*4
        
         ldr z20, [x2] 
         add x2, x2, #16*4
@@ -82,24 +92,34 @@ gemm_asm_sve_64_6_1:
         ldr z22, [x2] 
         add x2, x2, #16*4
         ldr z23, [x2] 
-        sub x2, x2, #23*16*4
+
+        sub x2, x2, #5*8*16*4 + 3*16*4
+
         
+
+        mov x15, #48
+
+loop_k:   
+
+        sub x15, x15, #1
+
 
         //load B
         ld1rw {z24.s}, p0/z, [x1]
-        add x1, x1, #4
+        add x1, x1, #4*48
         ld1rw {z25.s}, p0/z, [x1]
-        add x1, x1, #4
+        add x1, x1, #4*48
         ld1rw {z26.s}, p0/z, [x1]
-        add x1, x1, #4
+        add x1, x1, #4*48
         ld1rw {z27.s}, p0/z, [x1]
-        add x1, x1, #4
+        add x1, x1, #4*48
         ld1rw {z28.s}, p0/z, [x1]
-        add x1, x1, #4
+        add x1, x1, #4*48
         ld1rw {z29.s}, p0/z, [x1]
+        sub x1, x1, #5*4*48-4
 
-        
-        //load first 16 values of A
+
+        //load first 32 values of A
         ldr z30, [x0]
         add x0, x0, #16*4
         ldr z31, [x0]
@@ -121,11 +141,13 @@ gemm_asm_sve_64_6_1:
         fmla z17.s, p0/m, z28.s, z31.s
         fmla z21.s, p0/m, z29.s, z31.s
 
-        //load second 16 values of A
+        //load second 32 values of A
         ldr z30, [x0]
         add x0, x0, #16*4
         ldr z31, [x0]
-        add x0, x0, #16*4
+        //jump by leading dimension
+        add x0, x0, #16*4 + 64*4
+
 
         fmla z2.s,  p0/m, z24.s, z30.s
         fmla z6.s,  p0/m, z25.s, z30.s
@@ -141,9 +163,9 @@ gemm_asm_sve_64_6_1:
         fmla z19.s, p0/m, z28.s, z31.s
         fmla z23.s, p0/m, z29.s, z31.s
 
+        
 
-
-
+        cbnz x15, loop_k
 
         //store C
         str z0, [x2] 
@@ -153,7 +175,7 @@ gemm_asm_sve_64_6_1:
         str z2, [x2] 
         add x2, x2, #16*4
         str z3, [x2] 
-        add x2, x2, #16*4
+        add x2, x2, #16*4  + 16*4*4
 
         str z4, [x2] 
         add x2, x2, #16*4
@@ -162,7 +184,7 @@ gemm_asm_sve_64_6_1:
         str z6, [x2] 
         add x2, x2, #16*4
         str z7, [x2] 
-        add x2, x2, #16*4
+        add x2, x2, #16*4  + 16*4*4
         
         str z8, [x2] 
         add x2, x2, #16*4
@@ -171,7 +193,7 @@ gemm_asm_sve_64_6_1:
         str z10, [x2] 
         add x2, x2, #16*4
         str z11, [x2] 
-        add x2, x2, #16*4
+        add x2, x2, #16*4 + 16*4*4
         
         str z12, [x2] 
         add x2, x2, #16*4
@@ -180,7 +202,7 @@ gemm_asm_sve_64_6_1:
         str z14, [x2] 
         add x2, x2, #16*4
         str z15, [x2] 
-        add x2, x2, #16*4
+        add x2, x2, #16*4 + 16*4*4
         
         str z16, [x2] 
         add x2, x2, #16*4
@@ -189,7 +211,7 @@ gemm_asm_sve_64_6_1:
         str z18, [x2] 
         add x2, x2, #16*4
         str z19, [x2] 
-        add x2, x2, #16*4
+        add x2, x2, #16*4 + 16*4*4
        
         str z20, [x2] 
         add x2, x2, #16*4
@@ -198,6 +220,24 @@ gemm_asm_sve_64_6_1:
         str z22, [x2] 
         add x2, x2, #16*4
         str z23, [x2] 
+
+    	
+        // prepare pointers for next m iteration
+        sub x2, x2, #5*8*16*4 + 3*16*4
+        add x2, x2, #64*4
+        sub x1, x1, #48*4
+        sub x0, x0, #128*48*4
+        add x0, x0, #64*4
+        
+
+
+        cbnz x16, loop_m
+
+        //prepare pointers for next n iteration
+        x2
+        x1
+        x0
+        cbnz x17, loop_n
 
         // restore
         ldp d14, d15, [sp], #16
@@ -212,11 +252,9 @@ gemm_asm_sve_64_6_1:
         ldp x21, x22, [sp], #16
         ldp x19, x20, [sp], #16
 
-        
         // write number of flops to return register
-        // mov x0, 16
-        
-        ret
-        .size gemm_asm_sve_64_6_1, (. - gemm_asm_sve_64_6_1)
+        // mov x0, 16*48
 
-        
+        ret
+        .size gemm_asm_sve_128_48_48, (. - gemm_asm_sve_128_48_48)
+
