@@ -27,6 +27,9 @@ int main(){
         double l_sus_g_flops = l_n_repetitions; 
         std::chrono::high_resolution_clock::time_point l_tp0, l_tp1;
 
+        // 1.8 GHz, 1 operation per cycle, latency of 9, 2 pipelines
+        double l_peak = 1.8 * 1/9 * 2;
+        double l_percent_of_peak = 0;
         float * i_a = (float *) malloc(64*4);
         float * i_b = (float *) malloc(6*4);
         float * io_c = (float *) malloc(6*64*4);
@@ -47,9 +50,14 @@ int main(){
         l_sus_g_flops *= 64 * 6 * 1 * 2;
         l_sus_g_flops *= 1.0E-9;
         l_sus_g_flops /= l_dur.count(); 
+        
+        
         std::cout << "Repetitions: " << l_n_repetitions  << std::endl;
         std::cout << "Calculation time: " << l_dur.count()  << std::endl;
-        std::cout << "Sustained GFLOPS: " << l_sus_g_flops << std::endl << std::endl;
+        std::cout << "Sustained GFLOPS: " << l_sus_g_flops << std::endl;
+        l_percent_of_peak = l_sus_g_flops/l_percent_of_peak;
+        std::cout << "Percent of peak: " << l_percent_of_peak << std::endl << std::endl;
+
 
 
         free(i_a);
@@ -83,7 +91,8 @@ int main(){
         std::cout << "Repetitions: " << l_n_repetitions  << std::endl;
         std::cout << "Calculation time: " << l_dur.count()  << std::endl;
         std::cout << "Sustained GFLOPS: " << l_sus_g_flops << std::endl << std::endl;
-
+        l_percent_of_peak = l_sus_g_flops/l_percent_of_peak;
+        std::cout << "Percent of peak: " << l_percent_of_peak << std::endl << std::endl;
         
         free(i_a);
         free(i_b);
@@ -112,10 +121,13 @@ int main(){
         l_sus_g_flops *= 128 * 6 * 48 * 2;
         l_sus_g_flops *= 1.0E-9;
         l_sus_g_flops /= l_dur.count(); 
+
+
         std::cout << "Repetitions: " << l_n_repetitions  << std::endl;
         std::cout << "Calculation time: " << l_dur.count()  << std::endl;
         std::cout << "Sustained GFLOPS: " << l_sus_g_flops << std::endl << std::endl;
-
+        l_percent_of_peak = l_sus_g_flops/l_percent_of_peak;
+        std::cout << "Percent of peak: " << l_percent_of_peak << std::endl << std::endl;
         
         free(i_a);
         free(i_b);
