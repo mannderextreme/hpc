@@ -40,14 +40,14 @@ loop:
         ld1w z1.s, p0/z, [x1, x4, lsl #2] 
         ld1w z2.s, p0/z, [x2, x4, lsl #2]
         //calculate fma a += 2 * b
-        fmla z2.s, p0/z, z0.s, z1.s 
+        fmla z2.s, p0/m, z0.s, z1.s 
         //store result in c
-        st1w z2.s, p0.s, [x3, x4, lsl #2]
+        st1w z2.s, p0, [x3, x4, lsl #2]
 
         //increment loop counter
         incw x4
         cmp x4, x0
-        bne loop
+        beq loop
 
 
 

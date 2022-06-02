@@ -1,4 +1,9 @@
 #include "triad_high.h"
+#include <cstdint>
+#include <cmath>
+#include <chrono>
+#include <omp.h>
+#include <iostream>
 
 void triad_high( uint64_t         i_nValues,
                  float    const * i_a,

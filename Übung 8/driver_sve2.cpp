@@ -1,4 +1,9 @@
 #include <arm_fpvec_len.h>
+#include <cstdint>
+#include <cmath>
+#include <chrono>
+#include <omp.h>
+#include <iostream>
 
 extern "C"{
     fmlalb_sve2(floatvec_len_t * v_a,

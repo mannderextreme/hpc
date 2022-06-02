@@ -24,12 +24,12 @@ fmlalt_sve2:
         stp d14, d15, [sp, #-16]!
 
         // load vectors a, b, c with predicates for hp (a,b) and sp (c)
-        ld1w z0.h, p0/z, [x0]
-        ld1w z1.h, p0/z, [x1]
+        ld1w z0.s, p1/z, [x0]
+        ld1w z1.s, p1/z, [x1]
         ld1w z2.s, p0/z, [x2]
 
         //calculate fma top
-        fmlalt z2.s, z1.h, z2.h
+        fmlalt z2.s, z1.h, z0.h
 
         //store result in c
         st1w z2.s, p0, [x2]

@@ -1,5 +1,9 @@
-#include "triad_high.h"
+#include "kernels/triad_high.h"
 #include <cmath>
+#include <cstdint>
+#include <chrono>
+#include <omp.h>
+#include <iostream>
 
 
 
@@ -41,7 +45,7 @@ int main(){
     for(int i = 0; i < i_nValues; i++){
         float diff = v_c[i] - v_cref[i];
         diff = std::abs(diff);
-        max_diff = std::max;
+        max_diff = std::max(diff, max_diff);
     }
 
     std::cout << max_diff << std::endl;
