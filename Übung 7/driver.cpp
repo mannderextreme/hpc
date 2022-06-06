@@ -5,6 +5,9 @@
 #include <iostream>
 
 extern "C" {
+        void gemm_asm_sve_63_6_48(   float * i_a,
+                                    float * i_b,
+                                    float * io_c);
         void gemm_asm_sve_64_6_1(   float * i_a,
                                     float * i_b,
                                     float * io_c);
@@ -55,7 +58,7 @@ int main(){
         std::cout << "Repetitions: " << l_n_repetitions  << std::endl;
         std::cout << "Calculation time: " << l_dur.count()  << std::endl;
         std::cout << "Sustained GFLOPS: " << l_sus_g_flops << std::endl;
-        l_percent_of_peak = l_sus_g_flops/l_percent_of_peak;
+        l_percent_of_peak = l_sus_g_flops/l_peak;
         std::cout << "Percent of peak: " << l_percent_of_peak << std::endl << std::endl;
 
 
@@ -91,7 +94,7 @@ int main(){
         std::cout << "Repetitions: " << l_n_repetitions  << std::endl;
         std::cout << "Calculation time: " << l_dur.count()  << std::endl;
         std::cout << "Sustained GFLOPS: " << l_sus_g_flops << std::endl << std::endl;
-        l_percent_of_peak = l_sus_g_flops/l_percent_of_peak;
+        l_percent_of_peak = l_sus_g_flops/l_peak;
         std::cout << "Percent of peak: " << l_percent_of_peak << std::endl << std::endl;
         
         free(i_a);
@@ -126,7 +129,7 @@ int main(){
         std::cout << "Repetitions: " << l_n_repetitions  << std::endl;
         std::cout << "Calculation time: " << l_dur.count()  << std::endl;
         std::cout << "Sustained GFLOPS: " << l_sus_g_flops << std::endl << std::endl;
-        l_percent_of_peak = l_sus_g_flops/l_percent_of_peak;
+        l_percent_of_peak = l_sus_g_flops/l_peak;
         std::cout << "Percent of peak: " << l_percent_of_peak << std::endl << std::endl;
         
         free(i_a);
@@ -164,4 +167,39 @@ int main(){
         free(i_a);
         free(i_b);
         free(io_c);*/
+
+                l_n_repetitions = l_n_repetitions;
+
+        l_sus_g_flops = l_n_repetitions; 
+
+        i_a  = (float *) malloc(63*48*4);
+        i_b  = (float *) malloc(6*48*4);
+        io_c = (float *) malloc(6*63*4);
+
+        std::cout << "running GEMM 63_6_48 benchmarks" << std::endl;
+        l_tp0 = std::chrono::high_resolution_clock::now();
+        for (uint64_t l_j = 0; l_j < l_n_repetitions; l_j++){
+                gemm_asm_sve_63_6_48(   i_a,
+                                        i_b,
+                                        io_c);
+        }
+
+        l_tp1 = std::chrono::high_resolution_clock::now();
+
+        l_dur = l_tp1 - l_tp0;
+
+        l_sus_g_flops *= 63 * 6 * 48 * 2;
+        l_sus_g_flops *= 1.0E-9;
+        l_sus_g_flops /= l_dur.count(); 
+
+
+        std::cout << "Repetitions: " << l_n_repetitions  << std::endl;
+        std::cout << "Calculation time: " << l_dur.count()  << std::endl;
+        std::cout << "Sustained GFLOPS: " << l_sus_g_flops << std::endl << std::endl;
+        l_percent_of_peak = l_sus_g_flops/l_peak;
+        std::cout << "Percent of peak: " << l_percent_of_peak << std::endl << std::endl;
+        
+        free(i_a);
+        free(i_b);
+        free(io_c);
  }

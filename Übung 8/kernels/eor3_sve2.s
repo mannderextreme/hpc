@@ -49,3 +49,4 @@ eor3_sve2:
 
         ret
         .size eor3_sve2, (. - eor3_sve2)
+        

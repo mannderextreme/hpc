@@ -89,6 +89,11 @@ gemm_asm_sve_63_6_48:
 
         mov x15, #48
 
+        //generate p1 with 15 of 16 values switched on
+        mov x16, #1
+        mov x17, #16
+        whilelt p1.s, x16, x17
+
 loop:   
 
         sub x15, x15, #1
@@ -133,8 +138,10 @@ loop:
         //load second 32 values of A
         ldr z30, [x0]
         add x0, x0, #16*4
-        ldr z31, [x0]
-        add x0, x0, #16*4
+
+        //predicated load of last 16 values per row
+        ld1w z31.s, p1/z, [x0]
+        add x0, x0, #15*4
 
         fmla z2.s,  p0/m, z24.s, z30.s
         fmla z6.s,  p0/m, z25.s, z30.s
@@ -148,7 +155,7 @@ loop:
         fmla z11.s, p0/m, z26.s, z31.s
         fmla z15.s, p0/m, z27.s, z31.s
         fmla z19.s, p0/m, z28.s, z31.s
-        fmla z23.s, p0/m, z29.s, z31.s
+        fmla z23.s, p1/m, z29.s, z31.s
 
         cbnz x15, loop
 
@@ -204,7 +211,7 @@ loop:
         add x2, x2, #16*4
         str z22, [x2] 
         add x2, x2, #16*4
-        str z23, [x2] 
+        st1w z23.s, p1, [x2] 
 
         // restore
         ldp d14, d15, [sp], #16

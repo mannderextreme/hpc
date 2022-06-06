@@ -47,3 +47,4 @@ fmlalb_sve2:
 
         ret
         .size fmlalb_sve2, (. - fmlalb_sve2)
+        

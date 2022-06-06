@@ -27,27 +27,39 @@ triad_low:
         stp d14, d15, [sp, #-16]!
 
         // triad operation:
-
+        
         //constant factor (2)
         fmov z0.s, #2
         //loop counter
         mov x4, #0
+        //set predicate 
+        whilelt p0.s, x4, x0
+
+        b.none end_loop
         
 loop:
-        //set predicate 
-        whilelt p0.s, x0, x4
-        //load into array registers from a and b
+        //load into vector registers from a and b
         ld1w z1.s, p0/z, [x1, x4, lsl #2] 
         ld1w z2.s, p0/z, [x2, x4, lsl #2]
         //calculate fma a += 2 * b
-        fmla z2.s, p0/m, z0.s, z1.s 
+        fmla z1.s, p0/m, z0.s, z2.s 
         //store result in c
-        st1w z2.s, p0, [x3, x4, lsl #2]
+        st1w z1.s, p0, [x3, x4, lsl #2]
 
         //increment loop counter
+        /*
+        * incw x4
+        * cmp x4, x0
+        * bne loop
+        */
+
+        //increase loop counter by vector length
         incw x4
-        cmp x4, x0
-        beq loop
+        //prepare for next loop
+        whilelt p0.s, x4, x0
+        b.any loop
+
+end_loop:
 
 
 
