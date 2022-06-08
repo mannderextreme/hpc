@@ -8,6 +8,6 @@ sve_functions: driver_sve2.cpp kernels/eor3_sve2.s kernels/fmlalb_sve2.s kernels
 	gcc -pedantic -Wall -Wextra -Werror -march=armv8-a+sve2 -c kernels/eor3_sve2.s  -o ${BUILD_DIR}/eor3_sve2.o
 	gcc -pedantic -Wall -Wextra -Werror -march=armv8-a+sve2 -c kernels/fmlalb_sve2.s  -o ${BUILD_DIR}/fmlalb_sve2.o
 	gcc -pedantic -Wall -Wextra -Werror -march=armv8-a+sve2 -c kernels/fmlalt_sve2.s  -o ${BUILD_DIR}/fmlalt_sve2.o
-	g++ -pedantic -Wall -Wextra -Werror -march=armv8-a+sve2 driver_sve2  ${BUILD_DIR}/eor3_sve2.o ${BUILD_DIR}/fmlalb_sve2.o ${BUILD_DIR}/fmlalt_sve2.o -o ${BUILD_DIR}/sve_functions
+	g++ -pedantic -Wall -Wextra -Werror  driver_sve2  ${BUILD_DIR}/eor3_sve2.o ${BUILD_DIR}/fmlalb_sve2.o ${BUILD_DIR}/fmlalt_sve2.o -o ${BUILD_DIR}/sve_functions
 
 $(shell mkdir -p build) 

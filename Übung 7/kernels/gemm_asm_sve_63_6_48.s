@@ -139,7 +139,7 @@ loop:
         ldr z30, [x0]
         add x0, x0, #16*4
 
-        //predicated load of last 16 values per row
+        //predicated load of last 15 values per row
         ld1w z31.s, p1/z, [x0]
         add x0, x0, #15*4
 

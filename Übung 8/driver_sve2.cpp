@@ -6,11 +6,11 @@
 #include <iostream>
 
 extern "C"{
-    fmlalb_sve2(floatvec_len_t * v_a,
-                floatvec_len_t * v_b,
+    fmlalb_sve2(float16_t * v_a,
+                float16_t * v_b,
                 float * v_c);
-    fmlalt_sve2(floatvec_len_t * v_a,
-                floatvec_len_t * v_b,
+    fmlalt_sve2(float16_t * v_a,
+                float16_t * v_b,
                 float * v_c);
     eor3_sve2(  int * v_a,
                 int * v_b,
@@ -22,8 +22,8 @@ int main(){
 int vec_len = 16;
 //allocate memory for fmlalt/b
 
-floatvec_len_t * v_a = new floatvec_len_t[vec_len];
-floatvec_len_t * v_b = new floatvec_len_t[vec_len];
+float16_t * v_a = new float16_t[vec_len];
+float16_t * v_b = new float16_t[vec_len];
 float * v_c_top = new float[vec_len];
 float * v_c_bot = new float[vec_len];
 

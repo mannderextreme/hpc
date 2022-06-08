@@ -29,12 +29,12 @@ int main(){
     for(int i = 0; i < i_nValues; i++){
         v_a[i] = (float) drand48();
         v_b[i] = (float) drand48();
-        v_c[i] = (float) drand48();
-        v_cref[i] = (float) drand48();
+        v_c[i] = 0;
+        v_cref[i] = 0;
     } 
 
     //calculate reference
-    triad_high(i_nValues, v_a, v_b, v_c);
+    triad_high(i_nValues, v_a, v_b, v_cref);
     
 
     //calculate result with low level function
@@ -46,6 +46,7 @@ int main(){
         float diff = v_c[i] - v_cref[i];
         diff = std::abs(diff);
         max_diff = std::max(diff, max_diff);
+        // std::cout << v_c[i] << "   " << v_cref[i] << std::endl;
     }
 
     std::cout << max_diff << std::endl;
