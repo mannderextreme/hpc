@@ -119,21 +119,21 @@ void convert_c_from_bfmmla( uint64_t         i_m,
 int main (){
 
     //validating result for exxample kernel 
-    bfloat16_t  a_ex[4*8] = {  vcvth_bf16_f32(0.0),  vcvth_bf16_f32(1.0),  vcvth_bf16_f32(2.0),  vcvth_bf16_f32(3.0),  vcvth_bf16_f32(4.0),  vcvth_bf16_f32(5.0),  vcvth_bf16_f32(6.0),  vcvth_bf16_f32(7.0),
-                             vcvth_bf16_f32(8.0),  vcvth_bf16_f32(9.0), vcvth_bf16_f32(10.0), vcvth_bf16_f32(11.0), vcvth_bf16_f32(12.0), vcvth_bf16_f32(13.0), vcvth_bf16_f32(14.0), vcvth_bf16_f32(15.0), 
-                            vcvth_bf16_f32(16.0), vcvth_bf16_f32(17.0), vcvth_bf16_f32(18.0), vcvth_bf16_f32(19.0), vcvth_bf16_f32(20.0), vcvth_bf16_f32(21.0), vcvth_bf16_f32(22.0), vcvth_bf16_f32(23.0), 
-                            vcvth_bf16_f32(24.0), vcvth_bf16_f32(25.0), vcvth_bf16_f32(26.0), vcvth_bf16_f32(27.0), vcvth_bf16_f32(28.0), vcvth_bf16_f32(29.0), vcvth_bf16_f32(30.0), vcvth_bf16_f32(31.0) }; 
+    bfloat16_t  a_ex[4*8] = {   vcvth_bf16_f32(0.0),  vcvth_bf16_f32(1.0),  vcvth_bf16_f32(2.0),  vcvth_bf16_f32(3.0),  vcvth_bf16_f32(4.0),  vcvth_bf16_f32(5.0),  vcvth_bf16_f32(6.0),  vcvth_bf16_f32(7.0),
+                                vcvth_bf16_f32(8.0),  vcvth_bf16_f32(9.0), vcvth_bf16_f32(10.0), vcvth_bf16_f32(11.0), vcvth_bf16_f32(12.0), vcvth_bf16_f32(13.0), vcvth_bf16_f32(14.0), vcvth_bf16_f32(15.0), 
+                                vcvth_bf16_f32(16.0), vcvth_bf16_f32(17.0), vcvth_bf16_f32(18.0), vcvth_bf16_f32(19.0), vcvth_bf16_f32(20.0), vcvth_bf16_f32(21.0), vcvth_bf16_f32(22.0), vcvth_bf16_f32(23.0), 
+                                vcvth_bf16_f32(24.0), vcvth_bf16_f32(25.0), vcvth_bf16_f32(26.0), vcvth_bf16_f32(27.0), vcvth_bf16_f32(28.0), vcvth_bf16_f32(29.0), vcvth_bf16_f32(30.0), vcvth_bf16_f32(31.0) }; 
 
-    bfloat16_t  b_ex[2*8] = { vcvth_bf16_f32(0.0),   vcvth_bf16_f32(1.0),
- )                            vcvth_bf16_f32(2.0),  vcvth_bf16_f32(3.0),
- )                            vcvth_bf16_f32(4.0),  vcvth_bf16_f32(5.0),
- )                            vcvth_bf16_f32(6.0),  vcvth_bf16_f32(7.0),
- )                            vcvth_bf16_f32(8.0),  vcvth_bf16_f32(9.0),
- )                           vcvth_bf16_f32(10.0), vcvth_bf16_f32(11.0),
- )                           vcvth_bf16_f32(12.0), vcvth_bf16_f32(13.0), 
-)                            vcvth_bf16_f32(14.0), vcvth_bf16_f32(15.0) };)
-    float       c_ex[2*4] = { vcvth_bf16_f32(0.5), vcvth_bf16_f32(1.5), vcvth_bf16_f32(2.5), vcvth_bf16_f32(3.5),
-                        vcvth_bf16_f32(4.5), vcvth_bf16_f32(5.5), vcvth_bf16_f32(6.5), vcvth_bf16_f32(7.5) };
+    bfloat16_t  b_ex[2*8] = {   vcvth_bf16_f32(0.0),  vcvth_bf16_f32(1.0),
+                                vcvth_bf16_f32(2.0),  vcvth_bf16_f32(3.0),
+                                vcvth_bf16_f32(4.0),  vcvth_bf16_f32(5.0),
+                                vcvth_bf16_f32(6.0),  vcvth_bf16_f32(7.0),
+                                vcvth_bf16_f32(8.0),  vcvth_bf16_f32(9.0),
+                                vcvth_bf16_f32(10.0), vcvth_bf16_f32(11.0),
+                                vcvth_bf16_f32(12.0), vcvth_bf16_f32(13.0), 
+                                vcvth_bf16_f32(14.0), vcvth_bf16_f32(15.0) };
+    float       c_ex[2*4] = {   vcvth_bf16_f32(0.5), vcvth_bf16_f32(1.5), vcvth_bf16_f32(2.5), vcvth_bf16_f32(3.5),
+                                vcvth_bf16_f32(4.5), vcvth_bf16_f32(5.5), vcvth_bf16_f32(6.5), vcvth_bf16_f32(7.5) };
 
     std::cout << "Show example of bfmmla: " << std::endl;
     std::cout << c_ex[0] << ", " << c_ex[2] << std::endl;
