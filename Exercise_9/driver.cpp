@@ -254,7 +254,7 @@ int main (){
     delete[] B_fmmla;
     delete[] C;
     delete[] C_ref;
-    delete[] A_fmmla;
+    delete[] C_fmmla;
 
 
     std::cout << "Run kernel test for M=16, N=12, K=4: " << std::endl;
