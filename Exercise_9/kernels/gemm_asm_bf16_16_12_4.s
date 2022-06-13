@@ -28,6 +28,7 @@ gemm_asm_bf16_16_12_4:
     
 
         // load accumulator C
+        // set pointer 8*32 bits further
         
         ldr z0, [x2]
         add x2, x2, #32

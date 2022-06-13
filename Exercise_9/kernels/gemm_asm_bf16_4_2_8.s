@@ -29,11 +29,15 @@ gemm_asm_bf16_4_2_8:
         // load matrices A, B, C 
         ldr z0, [x0]
         ldr z1, [x1]
-        ldr z2, [x2]
+        add x1, x1 #32
+        ldr z2, [x1]
+
+        ldr z3, [x2]
 
 
         //calculate bfloat fma
-        bfmmla z2.s, z0.h, z1.h    
+        bfmmla z3.s, z0.h, z1.h
+        bfmmla z3.s, z0.h, z2.h    
 
         // store result 
         str z2, [x2]   
