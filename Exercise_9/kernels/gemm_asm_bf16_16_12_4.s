@@ -82,22 +82,22 @@ gemm_asm_bf16_16_12_4:
         
 
         // broadcast B to 6 registers
-        ld1rqh z24, p0, [x1]
+        ld1rqh z24.h, p0/z, [x1]
         add x1, x1, #32
 
-        ld1rqh z25, p0, [x1]
+        ld1rqh z25.h, p0/z, [x1]
         add x1, x1, #32
 
-        ld1rqh z26, p0, [x1]
+        ld1rqh z26.h, p0/z, [x1]
         add x1, x1, #32
 
-        ld1rqh z27, p0, [x1]
+        ld1rqh z27.h, p0/z, [x1]
         add x1, x1, #32
 
-        ld1rqh z28, p0, [x1]
+        ld1rqh z28.h, p0/z, [x1]
         add x1, x1, #32
 
-        ld1rqh z29, p0, [x1]
+        ld1rqh z29.h, p0/z, [x1]
         add x1, x1, #32
 
         // load first half of A
