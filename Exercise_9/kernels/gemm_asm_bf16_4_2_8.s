@@ -56,4 +56,4 @@ gemm_asm_bf16_4_2_8:
         ldp x19, x20, [sp], #16
 
         ret
-        .size gemm_asm_bf16_16_12_4, (. - gemm_asm_bf16_16_12_4)
+        .size gemm_asm_bf16_4_2_8, (. - gemm_asm_bf16_4_2_8)
