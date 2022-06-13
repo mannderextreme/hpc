@@ -85,7 +85,7 @@ gemm_asm_bf16_16_12_64:
 
 loop_k: 
         
-        sub x4, #1
+        sub x4, x4, #1
         
         // broadcast B to 6 registers
         ld1rqh z24.h, p0/z, [x1]
@@ -164,7 +164,7 @@ loop_k:
         sub x2, x2, #32
         str z21, [x2]
         sub x2, x2, #32
-        str 20, [x2]
+        str z20, [x2]
         sub x2, x2, #32
         str z19, [x2]
         sub x2, x2, #32
@@ -207,7 +207,7 @@ loop_k:
         sub x2, x2, #32
         str z1, [x2]
         sub x2, x2, #32
-        str 0, [x2]
+        str z0, [x2]
         
        
 
