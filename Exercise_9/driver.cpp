@@ -221,14 +221,14 @@ int main (){
 
     l_tp0 = std::chrono::high_resolution_clock::now();
     for (uint64_t l_j = 0; l_j < l_n_repetitions; l_j++){
-            gemm_asm_sbf16_16_12_4( A_fmmla,
+            gemm_asm_bf16_16_12_4( A_fmmla,
                                     B_fmmla,
                                     C_fmmla);
     }
 
     l_tp1 = std::chrono::high_resolution_clock::now();
 
-    l_dur = l_tp1 - l_tp0;
+    std::chrono::duration<double> l_dur = l_tp1 - l_tp0;
 
     l_sus_g_flops *= 16 * 12 * 4 * 2;
     l_sus_g_flops *= 1.0E-9;
@@ -273,7 +273,7 @@ int main (){
     C_fmmla = new float[m*n];
 
     //initialise Matrices 
-    float tmp = 0;
+    tmp = 0;
     for(int t_i = 0; i < m*k; t_i++){
         tmp = (float) drand48();
         tmp = vcvth_bf16_f32(tmp);
