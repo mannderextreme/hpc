@@ -132,8 +132,8 @@ int main (){
                                 vcvth_bf16_f32(10.0), vcvth_bf16_f32(11.0),
                                 vcvth_bf16_f32(12.0), vcvth_bf16_f32(13.0), 
                                 vcvth_bf16_f32(14.0), vcvth_bf16_f32(15.0) };
-    float       c_ex[2*4] = {   vcvth_bf16_f32(0.5), vcvth_bf16_f32(1.5), vcvth_bf16_f32(2.5), vcvth_bf16_f32(3.5),
-                                vcvth_bf16_f32(4.5), vcvth_bf16_f32(5.5), vcvth_bf16_f32(6.5), vcvth_bf16_f32(7.5) };
+    float       c_ex[2*4] = {   0.5, 1.5, 2.5, 3.5,
+                                4.5, 5.5, 6.5, 7.5 };
     
     
     gemm_asm_bf16_4_2_8(a_ex, b_ex, c_ex);
@@ -178,19 +178,20 @@ int main (){
 
     //initialise Matrices 
     float tmp = 0;
+    bfloat16_t tmp_bf16 = vcvth_bf16_f32(0.0);
     for(int t_i = 0; t_i < m*k; t_i++){
         tmp = (float) drand48();
-        tmp = vcvth_bf16_f32(tmp);
-        A[t_i]     = tmp; 
-        A_ref[t_i] = vcvtah_f32_bf16(tmp);
+        tmp_bf16 = vcvth_bf16_f32(tmp);
+        A[t_i]     = tmp_bf16; 
+        A_ref[t_i] = vcvtah_f32_bf16(tmp_bf16);
         
     }
 
     for(int t_i = 0; t_i < n*k; t_i++){
         tmp = (float) drand48();
-        tmp = vcvth_bf16_f32(tmp);
-        B[t_i]    = tmp; 
-        B_ref[t_i] = vcvtah_f32_bf16(tmp);
+        tmp_bf16 = vcvth_bf16_f32(tmp);
+        B[t_i]    = tmp_bf16; 
+        B_ref[t_i] = vcvtah_f32_bf16(tmp_bf16);
     }
 
     for(int t_i = 0; t_i < m*n; t_i++){
@@ -253,7 +254,7 @@ int main (){
     delete[] B_fmmla;
     delete[] C;
     delete[] C_ref;
-    delete[] A_fmmla;
+    delete[] C_fmmla;
 
 
     std::cout << "Run kernel test for M=16, N=12, K=4: " << std::endl;
@@ -280,17 +281,17 @@ int main (){
     tmp = 0;
     for(int t_i = 0; t_i < m*k; t_i++){
         tmp = (float) drand48();
-        tmp = vcvth_bf16_f32(tmp);
-        A[t_i]     = tmp; 
-        A_ref[t_i] = vcvtah_f32_bf16(tmp);
+        tmp_bf16 = vcvth_bf16_f32(tmp);
+        A[t_i]     = tmp_bf16; 
+        A_ref[t_i] = vcvtah_f32_bf16(tmp_bf16);
         
     }
 
     for(int t_i = 0; t_i < n*k; t_i++){
         tmp = (float) drand48();
-        tmp = vcvth_bf16_f32(tmp);
-        B[t_i]    = tmp; 
-        B_ref[t_i] = vcvtah_f32_bf16(tmp);
+        tmp_bf16 = vcvth_bf16_f32(tmp);
+        B[t_i]    = tmp_bf16; 
+        B_ref[t_i] = vcvtah_f32_bf16(tmp_bf16);
     }
 
     for(int t_i = 0; t_i < m*n; t_i++){
