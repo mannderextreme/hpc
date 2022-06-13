@@ -119,21 +119,21 @@ void convert_c_from_bfmmla( uint64_t         i_m,
 int main (){
 
     //validating result for exxample kernel 
-    bfloat16_t * a_ex = [   0.0,   1.0,  2.0,  3.0,  4.0,  5.0,  6.0,  7.0,
+    bfloat16_t * a_ex[] = {   0.0,   1.0,  2.0,  3.0,  4.0,  5.0,  6.0,  7.0,
                             8.0,   9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 
                             16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 
-                            24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0 ]; 
+                            24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0 }; 
 
-    bfloat16_t * b_ex = [  0.0,  1.0,
+    bfloat16_t * b_ex[] = {  0.0,  1.0,
                          2.0,  3.0,
                          4.0,  5.0,
                          6.0,  7.0,
                          8.0,  9.0,
                         10.0, 11.0,
                         12.0, 13.0, 
-                        14.0, 15.0 ];
-    float      * c_ex = [ 0.5, 1.5, 2.5, 3.5,
-                        4.5, 5.5, 6.5, 7.5 ];
+                        14.0, 15.0 };
+    float      * c_ex[] = { 0.5, 1.5, 2.5, 3.5,
+                        4.5, 5.5, 6.5, 7.5 };
 
     std::cout << "Show example of bfmmla: " << std::endl;
     std::cout << c_ex[0] << ", " << c_ex[2] << std::endl;
@@ -200,9 +200,9 @@ int main (){
     gemm_ref(A_ref, B_ref, C_ref, m, n, k, m, n, k);
     
     // transform matrices to correct form
-    convert_a_to_bfmmla(m, k, m, A, A_fmmla);
-    convert_b_to_bfmmla(k, n, k, B, B_fmmla);
-    convert_c_to_bfmmla(m, n, m, C, C_fmmla);
+    convert_a_to_bfmmla(m, k, A, A_fmmla);
+    convert_b_to_bfmmla(k, n, B, B_fmmla);
+    convert_c_to_bfmmla(m, n, C, C_fmmla);
 
     // calculate result using bfloat kernel
     
@@ -300,9 +300,9 @@ int main (){
     gemm_ref(A_ref, B_ref, C_ref, m, n, k, m, n, k);
     
     // transform matrices to correct form
-    convert_a_to_bfmmla(m, k, m, A, A_fmmla);
-    convert_b_to_bfmmla(k, n, k, B, B_fmmla);
-    convert_c_to_bfmmla(m, n, m, C, C_fmmla);
+    convert_a_to_bfmmla(m, k, A, A_fmmla);
+    convert_b_to_bfmmla(k, n, B, B_fmmla);
+    convert_c_to_bfmmla(m, n, C, C_fmmla);
 
     // calculate result using bfloat kernel
     
