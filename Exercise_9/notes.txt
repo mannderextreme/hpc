@@ -1,0 +1,26 @@
+
+Show example of bfmmla:
+1, 5.00787
+3.00391, 7.0079
+9.01587, 13.0159
+11.0159, 15.016
+Run kernel test for M=16, N=12, K=4:
+Maximum difference to reference kernel was: 15.2646
+Running gemm_bf16 16, 12, 4 benchmark
+Repetitions: 10000000
+Calculation time: 0.224639
+Sustained GFLOPS: 68.3763
+
+Percent of peak: 18.9934
+
+Run kernel test for M=16, N=12, K=4:
+Maximum difference to reference kernel was: 80.2975
+Running gemm_bf16 16, 12, 64 benchmark
+Repetitions: 10000000
+Calculation time: 0.957143
+Sustained GFLOPS: 0.00175566
+
+Percent of peak: 0.000487683
+
+Immernoch sehr verbugged, habe einige kryptische Fehler beim compilieren bekommen
+leider keine Zeit mehr um die Sachen zu fixen. 
