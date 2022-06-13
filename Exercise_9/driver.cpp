@@ -22,7 +22,7 @@ extern "C" {
 
 void convert_a_to_bfmmla( uint64_t           i_m,
                           uint64_t           i_n,
-                          uint64_t           i_ld,
+                          //uint64_t           i_ld,
                           bfloat16_t const * i_a_col_major,
                           bfloat16_t       * o_a_fmmla ){
                         
@@ -49,13 +49,13 @@ void convert_a_to_bfmmla( uint64_t           i_m,
 
 void convert_b_to_bfmmla( uint64_t           i_m,
                           uint64_t           i_n,
-                          uint64_t           i_ld,
+                          //uint64_t           i_ld,
                           bfloat16_t const * i_b_col_major,
                           bfloat16_t       * o_b_fmmla ){
                         
                         int iter = 0;
                         for(uint64_t i = 0; i < i_m; i+=4){
-                            for(uint64_t j = 0; j < i_n; i+=2){
+                            for(uint64_t j = 0; j < i_n; j+=2){
 
                                 o_b_fmmla[iter + 0] = i_b_col_major[i*i_m     + j + 1];
                                 o_b_fmmla[iter + 1] = i_b_col_major[i*i_m     + j + 1];
@@ -76,13 +76,13 @@ void convert_b_to_bfmmla( uint64_t           i_m,
 
 void convert_c_to_bfmmla( uint64_t         i_m,
                           uint64_t         i_n,
-                          uint64_t         i_ld,
+                          //uint64_t         i_ld,
                           float    const * i_c_col_major,
                           float          * o_c_fmmla ){
                         
                         int iter = 0;
                         for(uint64_t i = 0; i < i_m; i+=2){
-                            for(uint64_t j = 0; j < i_n; i+=2){
+                            for(uint64_t j = 0; j < i_n; j+=2){
                                 o_c_fmmla[iter+0] = i_c_col_major[i*i_m     + j    ];
                                 o_c_fmmla[iter+1] = i_c_col_major[i*i_m     + j + 1];
                                 o_c_fmmla[iter+2] = i_c_col_major[(i+1)*i_m + j    ];
@@ -98,13 +98,13 @@ void convert_c_to_bfmmla( uint64_t         i_m,
 
 void convert_c_from_bfmmla( uint64_t         i_m,
                             uint64_t         i_n,
-                            uint64_t         i_ld,
+                            //uint64_t         i_ld,
                             float    const * i_c_fmmla,
                             float          * o_c_col_major ){
                         
                         int iter = 0;
                         for(uint64_t i = 0; i < i_m; i+=2){
-                            for(uint64_t j = 0; j < i_n; i+=2){
+                            for(uint64_t j = 0; j < i_n; j+=2){
                                 i_c_col_major[i*i_m     + j    ]; = o_c_fmmla[iter+0]
                                 i_c_col_major[i*i_m     + j + 1]; = o_c_fmmla[iter+1]
                                 i_c_col_major[(i+1)*i_m + j    ]; = o_c_fmmla[iter+2]
