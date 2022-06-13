@@ -134,6 +134,10 @@ int main (){
                                 vcvth_bf16_f32(14.0), vcvth_bf16_f32(15.0) };
     float       c_ex[2*4] = {   vcvth_bf16_f32(0.5), vcvth_bf16_f32(1.5), vcvth_bf16_f32(2.5), vcvth_bf16_f32(3.5),
                                 vcvth_bf16_f32(4.5), vcvth_bf16_f32(5.5), vcvth_bf16_f32(6.5), vcvth_bf16_f32(7.5) };
+    
+    
+    gemm_asm_bf16_4_2_8(a_ex, b_ex, c_ex);
+    
 
     std::cout << "Show example of bfmmla: " << std::endl;
     std::cout << c_ex[0] << ", " << c_ex[2] << std::endl;
