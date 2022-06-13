@@ -273,8 +273,8 @@ int main (){
     C_fmmla = new float[m*n];
 
     //initialise Matrices 
-    int tmp = 0;
-    for(int t_i = 0; i < m*k; i++){
+    float tmp = 0;
+    for(int t_i = 0; i < m*k; t_i++){
         tmp = (float) drand48();
         tmp = vcvth_bf16_f32(tmp);
         A[t_i]     = tmp; 
@@ -282,14 +282,14 @@ int main (){
         
     }
 
-    for(int t_i = 0; i < n*k; i++){
+    for(int t_i = 0; i < n*k; t_i++){
         tmp = (float) drand48();
         tmp = vcvth_bf16_f32(tmp);
         B[t_i]    = tmp; 
         B_ref[t_i] = vcvtah_f32_bf16(tmp);
     }
 
-    for(int t_i = 0; i < m*n; i++){
+    for(int t_i = 0; i < m*n; t_i++){
         tmp = (float) drand48();
         C[t_i]     = tmp; 
         C_ref[t_i] = tmp;
