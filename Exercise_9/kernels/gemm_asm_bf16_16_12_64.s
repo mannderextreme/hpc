@@ -115,16 +115,16 @@ loop_k:
 
         //calculate first 8 rows of C 
 
-        bfmmla z0.s, z30.h, z24.h
-        bfmmla z4.s, z30.h, z25.h
-        bfmmla z8.s, z30.h, z26.h
+        bfmmla  z0.s, z30.h, z24.h
+        bfmmla  z4.s, z30.h, z25.h
+        bfmmla  z8.s, z30.h, z26.h
         bfmmla z12.s, z30.h, z27.h
         bfmmla z16.s, z30.h, z28.h
         bfmmla z20.s, z30.h, z29.h
 
-        bfmmla z1.s, z31.h, z24.h
-        bfmmla z5.s, z31.h, z25.h
-        bfmmla z9.s, z31.h, z26.h
+        bfmmla  z1.s, z31.h, z24.h
+        bfmmla  z5.s, z31.h, z25.h
+        bfmmla  z9.s, z31.h, z26.h
         bfmmla z13.s, z31.h, z27.h
         bfmmla z17.s, z31.h, z28.h
         bfmmla z21.s, z31.h, z29.h
@@ -138,15 +138,15 @@ loop_k:
         
 
         // calculate last 8 rows of C
-        bfmmla z2.s, z30.h, z24.h
-        bfmmla z6.s, z30.h, z25.h
+        bfmmla  z2.s, z30.h, z24.h
+        bfmmla  z6.s, z30.h, z25.h
         bfmmla z10.s, z30.h, z26.h
         bfmmla z14.s, z30.h, z27.h
-        bfmmla z18s.s, z30.h, z28.h
-        bfmmla z22.s, z30, z29.h
+        bfmmla z18.s, z30.h, z28.h
+        bfmmla z22.s, z30.h, z29.h
 
-        bfmmla z3.s, z31.h, z24.h
-        bfmmla z7.s, z31.h, z25.h
+        bfmmla  z3.s, z31.h, z24.h
+        bfmmla  z7.s, z31.h, z25.h
         bfmmla z11.s, z31.h, z26.h
         bfmmla z15.s, z31.h, z27.h
         bfmmla z19.s, z31.h, z28.h
