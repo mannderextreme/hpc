@@ -29,7 +29,7 @@ gemm_asm_bf16_4_2_8:
         // load matrices A, B, C 
         ldr z0, [x0]
         ldr z1, [x1]
-        add x1, x1 #32
+        add x1, x1, #32
         ldr z2, [x1]
 
         ldr z3, [x2]
