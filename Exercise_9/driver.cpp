@@ -210,7 +210,7 @@ int main (){
     
     float max_diff = 0;
      for( int t_i = 0; t_i < m*n; t_i++){
-        float diff = C[i] - C_ref[i];
+        float diff = C[t_i] - C_ref[t_i];
         diff = std::abs(diff);
         max_diff = std::max(diff, max_diff);
     } 
@@ -311,7 +311,7 @@ int main (){
     
     float max_diff = 0;
      for( int t_i = 0; t_i < m*n; t_i++){
-        float diff = C[i] - C_ref[i];
+        float diff = C[t_i] - C_ref[t_i];
         diff = std::abs(diff);
         max_diff = std::max(diff, max_diff);
     } 
