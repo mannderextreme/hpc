@@ -105,10 +105,10 @@ void convert_c_from_bfmmla( uint64_t         i_m,
                         int iter = 0;
                         for(uint64_t i = 0; i < i_m; i+=2){
                             for(uint64_t j = 0; j < i_n; j+=2){
-                                i_c_col_major[i*i_m     + j    ]; = o_c_fmmla[iter+0]
-                                i_c_col_major[i*i_m     + j + 1]; = o_c_fmmla[iter+1]
-                                i_c_col_major[(i+1)*i_m + j    ]; = o_c_fmmla[iter+2]
-                                i_c_col_major[(i+1)*i_m + j + 1]; = o_c_fmmla[iter+3]
+                                o_c_col_major[i*i_m     + j    ] = i_c_fmmla[iter+0];
+                                o_c_col_major[i*i_m     + j + 1] = i_c_fmmla[iter+1];
+                                o_c_col_major[(i+1)*i_m + j    ] = i_c_fmmla[iter+2];
+                                o_c_col_major[(i+1)*i_m + j + 1] = i_c_fmmla[iter+3];
 
                                 iter += 4;
                                 
@@ -119,12 +119,12 @@ void convert_c_from_bfmmla( uint64_t         i_m,
 int main (){
 
     //validating result for exxample kernel 
-    bfloat16_t a_ex = {0.0,   1.0,  2.0,  3.0,  4.0,  5.0,  6.0,  7.0,
+    bfloat16_t * a_ex = {0.0,   1.0,  2.0,  3.0,  4.0,  5.0,  6.0,  7.0,
                        8.0,   9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 
                        16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 
                        24.0, 25.0, 26.0, 27.0, 28.0, 29.0, 30.0, 31.0 }; 
 
-    bfloat16_t b_ex = {  0.0,  1.0,
+    bfloat16_t * b_ex = {  0.0,  1.0,
                          2.0,  3.0,
                          4.0,  5.0,
                          6.0,  7.0,
@@ -132,7 +132,7 @@ int main (){
                         10.0, 11.0,
                         12.0, 13.0, 
                         14.0, 15.0 };
-    float      c_ex = { 0.5, 1.5, 2.5, 3.5,
+    float      * c_ex = { 0.5, 1.5, 2.5, 3.5,
                         4.5, 5.5, 6.5, 7.5 };
 
     std::cout << "Show example of bfmmla: " << std::endl;
