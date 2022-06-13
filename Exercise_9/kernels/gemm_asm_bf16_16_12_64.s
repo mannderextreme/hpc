@@ -30,54 +30,54 @@ gemm_asm_bf16_16_12_64:
         // load accumulator C
         
         ldr z0, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z1, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z2, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z3, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z4, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z5, [x2]
-        add x2, #32
+        add x2, x2, #32
 
         ldr z6, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z7, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z8, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z9, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z10, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z11, [x2]
-        add x2, #32
+        add x2, x2, #32
 
         ldr z12, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z13, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z14, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z15, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z16, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z17, [x2]
-        add x2, #32
+        add x2, x2, #32
 
         ldr z18, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z19, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z20, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z21, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z22, [x2]
-        add x2, #32
+        add x2, x2, #32
         ldr z23, [x2]
         
         //init loop counter (K = 64 --> #iterationen = 64/4)
@@ -159,54 +159,54 @@ loop_k:
 
        // store accumulator C 
         str z23, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z22, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z21, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str 20, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z19, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z18, [x2]
-        sub x2, #32
+        sub x2, x2, #32
 
         str z17, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z16, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z15, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z14, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z13, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z12, [x2]
-        sub x2, #32
+        sub x2, x2, #32
 
         str z11, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z10, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z9, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z8, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z7, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z6, [x2]
-        sub x2, #32
+        sub x2, x2, #32
 
         str z5, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z4, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z3, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z2, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str z1, [x2]
-        sub x2, #32
+        sub x2, x2, #32
         str 0, [x2]
         
        
