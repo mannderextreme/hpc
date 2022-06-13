@@ -141,9 +141,9 @@ int main (){
     std::cout << c_ex[4] << ", " << c_ex[6] << std::endl;
     std::cout << c_ex[5] << ", " << c_ex[7] << std::endl;
 
-    delete[] a_ex;
-    delete[] b_ex;
-    delete[] c_ex;
+    //delete[] a_ex;
+    //delete[] b_ex;
+    //delete[] c_ex;
     
     uint64_t l_n_repetitions = 10000000;
     double l_sus_g_flops = l_n_repetitions; 
@@ -307,9 +307,9 @@ int main (){
     // calculate result using bfloat kernel
     
     gemm_asm_bf16_16_12_64(A_fmmla, B_fmmla, C_fmmla);
-    convert_c_from_bfmmla(m, n, m, C_fmmla, C);
+    convert_c_from_bfmmla(m, n, C_fmmla, C);
     
-    float max_diff = 0;
+    max_diff = 0;
      for( int t_i = 0; t_i < m*n; t_i++){
         float diff = C[t_i] - C_ref[t_i];
         diff = std::abs(diff);
@@ -322,7 +322,7 @@ int main (){
 
     l_tp0 = std::chrono::high_resolution_clock::now();
     for (uint64_t l_j = 0; l_j < l_n_repetitions; l_j++){
-            gemm_asm_sbf16_16_12_4( A_fmmla,
+            gemm_asm_bf16_16_12_64( A_fmmla,
                                     B_fmmla,
                                     C_fmmla);
     }
