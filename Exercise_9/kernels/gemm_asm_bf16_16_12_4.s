@@ -154,7 +154,7 @@ gemm_asm_bf16_16_12_4:
         sub x2, x2, #32
         str z21, [x2]
         sub x2, x2, #32
-        str 20, [x2]
+        str z20, [x2]
         sub x2, x2, #32
         str z19, [x2]
         sub x2, x2, #32
@@ -197,7 +197,7 @@ gemm_asm_bf16_16_12_4:
         sub x2, x2, #32
         str z1, [x2]
         sub x2, x2, #32
-        str 0, [x2]
+        str z0, [x2]
         
        
 
