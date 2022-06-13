@@ -89,29 +89,29 @@ loop_k:
         
         // broadcast B to 6 registers
         ld1rqh z24, p0, [x1]
-        add x1, #32
+        add x1, x1, #32
 
         ld1rqh z25, p0, [x1]
-        add x1, #32
+        add x1, x1, #32
 
         ld1rqh z26, p0, [x1]
-        add x1, #32
+        add x1, x1, #32
 
         ld1rqh z27, p0, [x1]
-        add x1, #32
+        add x1, x1, #32
 
         ld1rqh z28, p0, [x1]
-        add x1, #32
+        add x1, x1, #32
 
         ld1rqh z29, p0, [x1]
-        add x1, #32
+        add x1, x1, #32
 
         // load first half of A
         ldr z31, [x0]
-        add x0, #32
+        add x0, x0, #32
 
         ldr z30, [x0]
-        add x0, #32
+        add x0, x0, #32
 
         //calculate first 8 rows of C 
 
@@ -131,10 +131,10 @@ loop_k:
 
         // load second half of A
         ldr z31, [x0]
-        add x0, #32
+        add x0, x0, #32
 
         ldr z30, [x0]
-        add x0, #32
+        add x0, x0, #32
         
 
         // calculate last 8 rows of C
