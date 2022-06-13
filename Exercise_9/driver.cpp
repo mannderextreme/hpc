@@ -178,7 +178,7 @@ int main (){
 
     //initialise Matrices 
     float tmp = 0;
-    bfloat16_t tmp_bf16 = 0.0;
+    bfloat16_t tmp_bf16 = vcvth_bf16_f32(0.0);
     for(int t_i = 0; t_i < m*k; t_i++){
         tmp = (float) drand48();
         tmp_bf16 = vcvth_bf16_f32(tmp);
@@ -279,12 +279,11 @@ int main (){
 
     //initialise Matrices 
     tmp = 0;
-    tmp_bf16 = 0;
     for(int t_i = 0; t_i < m*k; t_i++){
         tmp = (float) drand48();
         tmp_bf16 = vcvth_bf16_f32(tmp);
         A[t_i]     = tmp_bf16; 
-        A_ref[t_i] = vcvtah_f32_bf16(tmp_bf16tmp);
+        A_ref[t_i] = vcvtah_f32_bf16(tmp_bf16);
         
     }
 
