@@ -27,8 +27,8 @@ void convert_a_to_bfmmla( uint64_t           i_m,
                           bfloat16_t       * o_a_fmmla ){
                         
                         int iter = 0;
-                        for(int i = 0; i < i_m; i+2){
-                            for(int j = 0; j < i_n; i+4){
+                        for(int i = 0; i < i_m; i+=2){
+                            for(int j = 0; j < i_n; i+=4){
                                 
                                 o_a_fmmla[iter + 0] = i_a_col_major[(i+0)*i_m + j    ];
                                 o_a_fmmla[iter + 1] = i_a_col_major[(i+1)*i_m + j    ];
@@ -54,8 +54,8 @@ void convert_b_to_bfmmla( uint64_t           i_m,
                           bfloat16_t       * o_b_fmmla ){
                         
                         int iter = 0;
-                        for(int i = 0; i < i_m; i+4){
-                            for(int j = 0; j < i_n; i+2){
+                        for(int i = 0; i < i_m; i+=4){
+                            for(int j = 0; j < i_n; i+=2){
 
                                 o_b_fmmla[iter + 0] = i_b_col_major[i*i_m     + j + 1];
                                 o_b_fmmla[iter + 1] = i_b_col_major[i*i_m     + j + 1];
@@ -81,8 +81,8 @@ void convert_c_to_bfmmla( uint64_t         i_m,
                           float          * o_c_fmmla ){
                         
                         int iter = 0;
-                        for(int i = 0; i < i_m; i+2){
-                            for(int j = 0; j < i_n; i+2){
+                        for(int i = 0; i < i_m; i+=2){
+                            for(int j = 0; j < i_n; i+=2){
                                 o_c_fmmla[iter+0] = i_c_col_major[i*i_m     + j    ];
                                 o_c_fmmla[iter+1] = i_c_col_major[i*i_m     + j + 1];
                                 o_c_fmmla[iter+2] = i_c_col_major[(i+1)*i_m + j    ];
@@ -103,8 +103,8 @@ void convert_c_from_bfmmla( uint64_t         i_m,
                             float          * o_c_col_major ){
                         
                         int iter = 0;
-                        for(int i = 0; i < i_m; i+2){
-                            for(int j = 0; j < i_n; i+2){
+                        for(int i = 0; i < i_m; i+=2){
+                            for(int j = 0; j < i_n; i+=2){
                                 i_c_col_major[i*i_m     + j    ]; = o_c_fmmla[iter+0]
                                 i_c_col_major[i*i_m     + j + 1]; = o_c_fmmla[iter+1]
                                 i_c_col_major[(i+1)*i_m + j    ]; = o_c_fmmla[iter+2]
