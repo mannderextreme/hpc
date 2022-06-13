@@ -1,0 +1,9 @@
+Task 1:
+
+            pipeline    latency     throughput
+fmul:       V           3           2
+fmla:       V           4           2
+
+Pipeline V: FP/ASIMD 0/1
+
+Task 2:
