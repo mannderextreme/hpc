@@ -65,4 +65,6 @@ uint32_t mini_jit::instructions::Base::dpAndImm(uint8_t  i_regGpDes,
   l_ins |= (0xfff & i_imm12) << 10;
   l_ins |= (0x1 & i_size) << 31;
 
+  return l_ins;
+
 }

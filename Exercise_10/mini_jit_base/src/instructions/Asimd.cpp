@@ -103,6 +103,7 @@ uint32_t mini_jit::instructions::Asimd::dpFmovVectorImm( uint8_t   i_regSimdDes,
   uint32_t l_ins = 0xf00f400;
 
   l_ins |= 0x1f & i_regSimdDes;
+  
 
   // set a, b, c
   l_ins |= (0b111 & (i_imm8 >> 5)) << 16;
@@ -118,3 +119,33 @@ uint32_t mini_jit::instructions::Asimd::dpFmovVectorImm( uint8_t   i_regSimdDes,
 
   return l_ins;
 }
+
+uint32_t mini_jit::instructions::Asimd::dpFmlaVector(uint8_t i_regSveDes,
+                                                      uint8_t i_regSveSrcN,
+                                                      uint8_t i_regSveSrcM,
+                                                      arrspec_t i_arrSpec){
+  uint32_t l_ins = 0x0E20CC00;
+
+  // set source register m
+  l_ins |= 0x1f & i_regSveSrcM;
+
+  // set source register n
+  l_ins |= (0x1f & i_regSveSrcN) << 5;
+
+  // set destination register
+  l_ins |= (0x1f & i_regSveDes) << 16;
+
+  // set specifier Q and sz
+  if( i_arrSpec == arrspec_t::s2 ) {
+    l_ins |= 0b0 << 22;
+    l_ins |= 0b0 << 30;
+  }
+  else if( i_arrSpec == arrspec_t::s4 ) {
+    l_ins |= 0b0 << 22;
+    l_ins |= 0b1 << 30;
+  }
+  else if( i_arrSpec == arrspec_t::d2 ) {
+    l_ins |= 0b1 << 22;
+    l_ins |= 0b1 << 30;
+  }
+                                                      }

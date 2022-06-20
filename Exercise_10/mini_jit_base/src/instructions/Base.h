@@ -73,6 +73,22 @@ class mini_jit::instructions::Base {
                               uint8_t  i_regGpSrc,
                               uint16_t i_imm12,
                               uint8_t  i_size );
+
+
+    /**
+     * Gets the machine code for and immediate.
+     *
+     * @param i_regGpDes general purpose destination register.
+     * @param i_regGpSrc general purpose source register.
+     * @param i_imm12 value of the 12-bit immediate.
+     * @param i_size 32-bit version if 0, 64-bit version if 1.
+     *
+     * @return instruction.
+     **/
+    static uint32_t dpAndImm( uint8_t  i_regGpDes,
+                              uint8_t  i_regGpSrc,
+                              uint16_t i_imm12,
+                              uint8_t  i_size );
 };
 
 #endif

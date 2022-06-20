@@ -1,5 +1,5 @@
-#ifndef MINI_JIT_GENERATORS_SIMPLE_H
-#define MINI_JIT_GENERATORS_SIMPLE_H
+#ifndef MINI_JIT_GENERATORS_MYEXAMPLE_H
+#define MINI_JIT_GENERATORS_MYEXAMPLE_H
 
 #include "../backend/Kernel.h"
 #include "../instructions/Base.h"
@@ -17,7 +17,7 @@ class mini_jit::generators::MyExample {
     
   public:
     /**
-     * Generates a simple kernel which sets the value three to register w0.
+     * Generates a MyExample kernel which does bitwise AND with w0 and 0.
      *
      * @return function pointer to kernel.
      **/

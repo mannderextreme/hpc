@@ -90,3 +90,34 @@ TEST_CASE( "Tests dpFmovVectorImm.", "[Asimd][dpFmovVectorImm]" ) {
   REQUIRE( l_ins == 0x0f03f611 );
 
 }
+
+TEST_CASE(" Tests dpFmlaVector."){
+  uint32_t l_ins = 0
+  mini_jit::instructions::Asimd::arrspec_t l_as = mini_jit::instructions::Asimd::arrspec_t::s4;
+  
+  // generate fmla instruction with register v0 as both src and dest in sp
+  l_ins = mini_jit::instructions::Asimd::dpFmlaVector(  0,
+                                                        0,
+                                                        0,
+                                                        l_as);
+  REQUIRE( l_ins == 0x8E00CC00);
+
+
+  l_as = mini_jit::instructions::Asimd::arrspec_t::d2;
+
+  // generate fmla instruction with register v0 as both src and dest in dp
+  l_ins = mini_jit::instructions::Asimd::dpFmlaVector(  0,
+                                                        0,
+                                                        0,
+                                                        l_as);
+  REQUIRE( l_ins == 0x8E60CC00);
+
+  l_as = mini_jit::instructions::Asimd::arrspec_t::d2;
+
+  // generate fmla instruction with register v2, v3 as src, and v1 as dest in dp
+  l_ins = mini_jit::instructions::Asimd::dpFmlaVector(  1,
+                                                        2,
+                                                        3,
+                                                        l_as);
+  REQUIRE( l_ins == 0x8E61CC83);
+}
