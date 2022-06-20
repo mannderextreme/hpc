@@ -11,7 +11,9 @@ mini_jit: src/driver.cpp src/instructions/Base.cpp src/instructions/Asimd.cpp sr
 
 		g++ ${OPTIONS} src/driver.cpp ${BUILD_DIR}/instructions/Base.o ${BUILD_DIR}/instructions/Asimd.o \
 		                              ${BUILD_DIR}/backend/Kernel.o \
-		                              ${BUILD_DIR}/generators/Simple.o ${BUILD_DIR}/generators/Loop.o ${BUILD_DIR}/generators/MyExample.o -o ${BUILD_DIR}/mini_jit
+		                              ${BUILD_DIR}/generators/Simple.o ${BUILD_DIR}/generators/Loop.o \
+									  ${BUILD_DIR}/generators/MyExample.o \
+		    -o ${BUILD_DIR}/mini_jit
 
 test: src/test.cpp src/driver.cpp src/instructions/Base.cpp src/instructions/Asimd.cpp src/backend/Kernel.cpp src/generators/Simple.cpp src/generators/Loop.cpp src/instructions/Asimd.test.cpp
 		g++ ${OPTIONS} -c src/instructions/Base.cpp -o ${BUILD_DIR}/instructions/Base.o

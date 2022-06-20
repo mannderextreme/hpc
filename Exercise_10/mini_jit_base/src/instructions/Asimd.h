@@ -13,9 +13,11 @@ class mini_jit::instructions::Asimd {
   public:
     //! arrangement specifiers
     enum arrspec_t: char {
-      s2 = 0,
-      s4 = 1,
-      d2 = 2
+      s1 = 0,
+      s2 = 1,
+      s4 = 2,
+      d1 = 3,
+      d2 = 4
     };
 
     //! register sizes
@@ -99,21 +101,6 @@ class mini_jit::instructions::Asimd {
     static uint32_t dpFmovVectorImm( uint8_t   i_regSimdDes,
                                      uint8_t   i_imm8,
                                      arrspec_t i_arrSpec );
-
-  	/**
-     * Gets the machine code for FMLA (vector).
-     *
-     * @param i_regSveDes SVE destination register.
-     * @param i_regSveSrcN SVE source register N.
-     * @param i_regSveSrcM SVE source register M.
-     * @param i_arrSpec arrangement specifier.
-     *
-     * @return instruction.
-     **/
-    static uint32_t mini_jit::instructions::Asimd::dpFmlaVector(uint8_t i_regSveDes,
-                                                      uint8_t i_regSveSrcN,
-                                                      uint8_t i_regSveSrcM,
-                                                      arrspec_t i_arrSpec)
 };
 
 #endif
