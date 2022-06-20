@@ -96,7 +96,7 @@ void ( *mini_jit::generators::SmallGemmSve::generate( uint32_t i_m,
  
 
   // reset offset 
-  m_kernel.resetOffset();
+  //m_kernel.resetOffset();
 
   // decrease loop-counter
   l_ins = instructions::Base::dpSubImm( 1,
@@ -167,11 +167,11 @@ void ( *mini_jit::generators::SmallGemmSve::generate( uint32_t i_m,
   m_kernel.addInstruction(mini_jit::instructions::Base::dpAddImm(0, 0, 16*4, 0));
   
   // loop if required
-  int32_t l_jumpPc = -m_kernel.getOffset() / 4;
-  l_ins = instructions::Base::bCbnz( 5,
-                                     l_jumpPc,
-                                     0 );
-  m_kernel.addInstruction( l_ins );
+  //int32_t l_jumpPc = -m_kernel.getOffset() / 4;
+  //l_ins = instructions::Base::bCbnz( 5,
+  //                                   l_jumpPc,
+  //                                   0 );
+  //m_kernel.addInstruction( l_ins );
 
   // store accumulator 
   m_kernel.addInstruction(mini_jit::instructions::Sve::lsStrVec(0, 2, 0));
