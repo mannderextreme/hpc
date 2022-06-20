@@ -4,6 +4,7 @@
 #include "generators/Triad.h"
 #include "benchmarks/SmallGemm.h"
 #include "generators/SmallGemmSve.h"
+#include "generators/MyExample.h"
 
 int main() {
   std::cout << "###########################" << std::endl;
@@ -31,6 +32,17 @@ int main() {
 
   std::cout << "  running" << std::endl;
   std::cout << "    result: " << l_funcLoop() << std::endl;
+  	
+  /*
+   * MyExample
+   */
+  std::cout << "MyExample:" << std::endl;
+  std::cout << "  generating" << std::endl;
+  mini_jit::generators::MyExample l_myExample;
+  uint32_t (* l_funcMyExample)() = l_myExample.generate();
+
+  std::cout << "  running" << std::endl;
+  std::cout << "    result: " << l_funcMyExample() << std::endl;
 
   /*
    * Triad
