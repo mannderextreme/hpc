@@ -1,4 +1,4 @@
-#include <catch2/catch.hpp>
+#include <catch.hpp>
 #include "Base.h"
 
 TEST_CASE( "Tests dpAddSr.", "[Base][dpAddSr]" ) {

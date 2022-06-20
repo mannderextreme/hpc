@@ -1,12 +1,21 @@
-#include <catch2/catch.hpp>
+#include <catch.hpp>
 #include "Sve.h"
 
 TEST_CASE( "Tests lsLdrVec.", "[Sve][lsLdrVec]" ) {
-  // TODO: finish implementation
+  uint32_t l_ins = 0;
+  l_ins = mini_jit::instructions::Sve::lsLdrVec(31,
+                                                31,
+                                                 511);
+  
+  REQUIRE(l_ins == 0x85bf5fff);
 }
 
 TEST_CASE( "Tests lsStrVec.", "[Sve][lsStrVec]" ) {
-  // TODO: finish implementation
+  uint32_t l_ins = 0;
+  l_ins = mini_jit::instructions::Sve::lsStrVec(31,
+                                                31,
+                                                 511);
+  REQUIRE(l_ins == 0xE5bf5fff);
 }
 
 TEST_CASE( "Tests lsLd1Rw.", "[Sve][lsLd1Rw]" ) {
@@ -60,5 +69,12 @@ TEST_CASE( "Tests prWhilelt", "[Sve][prWhilelt]" ) {
 }
 
 TEST_CASE( "Tests dpFmlaVec", "[Sve][dpFmlaVec]" ) {
-  // TODO: finish implementation
+  uint32_t l_ins = 0;
+  l_ins = mini_jit::instructions::Sve::dpFmlaVec( 31,
+                                          7,
+                                          31,
+                                          31,
+                                          mini_jit::instructions::Sve::sizespec_t::d);
+
+  REQUIRE(l_ins == 0x65ff1fff);
 }

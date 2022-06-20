@@ -8,10 +8,11 @@ uint32_t mini_jit::instructions::Sve::lsLdrVec( uint8_t  i_regSveVec,
   l_ins |= 0x1f & i_regSveVec;
   l_ins |= (0x1f & i_regGpAddr) << 5;
 
-  // upper 6 bits of imm9 to instruction
-  l_ins |= (0x1f8 & i_imm9) << 16;
   // lower 3 bits of imm9 to instruction
   l_ins |= (0x7 & i_imm9) << 10;
+  // upper 6 bits of imm9 to instruction
+  l_ins |= (0x3f & (i_imm9 >> 3)) << 16;
+  
 
   
 
@@ -21,15 +22,15 @@ uint32_t mini_jit::instructions::Sve::lsLdrVec( uint8_t  i_regSveVec,
 uint32_t mini_jit::instructions::Sve::lsStrVec( uint8_t  i_regSveVec,
                                                 uint8_t  i_regGpAddr,
                                                 uint32_t i_imm9 ) {
-  uint32_t l_ins = 0xE5804;
+  uint32_t l_ins = 0xE5804000;
 
   l_ins |= 0x1f & i_regSveVec;
   l_ins |= (0x1f & i_regGpAddr) << 5;
 
-  // upper 6 bits of imm9 to instruction
-  l_ins |= (0x1f8 & i_imm9) << 16;
   // lower 3 bits of imm9 to instruction
   l_ins |= (0x7 & i_imm9) << 10;
+  // upper 6 bits of imm9 to instruction
+  l_ins |= (0x3f & (i_imm9 >> 3)) << 16;
 
   return l_ins;
 }

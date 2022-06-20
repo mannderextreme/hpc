@@ -1,4 +1,4 @@
-#include <catch2/catch.hpp>
+#include <catch.hpp>
 #include "Asimd.h"
 
 TEST_CASE( "Tests lsLdrImmUnsOff.", "[Asimd][lsLdrImmUnsOff]" ) {
