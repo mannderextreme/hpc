@@ -25,6 +25,9 @@ class mini_jit::backend::Kernel {
     //! instruction-offset in bytes since last reset
     uint32_t m_offset = 0;
 
+    //! stack used to store offsets
+    std::vector< uint32_t > m_offsetStack;
+
     /**
      * Allocates memory through POSIX mmap.
      *
@@ -79,6 +82,18 @@ class mini_jit::backend::Kernel {
      * @return offset in byte since last reset.
      **/
     uint32_t getOffset();
+
+    /**
+     * Pushes the current offset to the stack.
+     **/
+    void pushOffset();
+
+    /**
+     * Removes the last added offset from the stack and returns its value.
+     *
+     * @return value of the offset.
+     **/
+    uint32_t popOffset();
 
     /**
      * Gets the size of the kernel.

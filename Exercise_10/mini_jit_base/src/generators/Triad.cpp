@@ -1,12 +1,10 @@
-#include "SmallGemmSve.h"
+#include "Triad.h"
 #include "../instructions/Base.h"
-#include "../instructions/Sve.h"
+#include "../instructions/Asimd.h"
 
-void ( *mini_jit::generators::SmallGemmSve::generate( uint32_t i_m,
-                                                      uint32_t i_n,
-                                                      uint32_t i_k ) )( float const * i_a,
-                                                                        float const * i_b,
-                                                                        float       * io_c ) {
+void ( *mini_jit::generators::Triad::Triad::generate( uint64_t i_nValues ) )( float const * i_a,
+                                                                              float const * i_b,
+                                                                              float       * o_c ) {
   uint32_t l_ins = 0;
 
   // store according to procedure call standard
@@ -42,12 +40,10 @@ void ( *mini_jit::generators::SmallGemmSve::generate( uint32_t i_m,
   m_kernel.addInstruction( l_ins );
 
   // we might debug through file-io
-  std::string l_file = "small_gemm_sve.bin";
-  m_kernel.write( l_file.c_str() );
+  //std::string l_file = "triad.bin";
+  //m_kernel.write( l_file.c_str() );
 
   m_kernel.setKernel();
 
-  return (void (*)( float const *,
-                    float const *,
-                    float       *  )) m_kernel.getKernel();
+  return (void (*)( float const *, float const *, float * )) m_kernel.getKernel();
 }

@@ -46,6 +46,17 @@ uint32_t mini_jit::backend::Kernel::getOffset() {
   return m_offset;
 }
 
+void mini_jit::backend::Kernel::pushOffset() {
+  m_offsetStack.push_back( m_offset );
+}
+
+uint32_t mini_jit::backend::Kernel::popOffset() {
+  uint32_t l_val = m_offsetStack.back();
+  m_offsetStack.pop_back();
+
+  return l_val;
+}
+
 uint32_t mini_jit::backend::Kernel::getSize() {
   return m_codeBuffer.size() * 4;
 }
