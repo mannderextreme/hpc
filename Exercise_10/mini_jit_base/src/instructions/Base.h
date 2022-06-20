@@ -107,6 +107,11 @@ class mini_jit::instructions::Base {
                               uint8_t  i_regGpSrc,
                               uint16_t i_imm12,
                               uint8_t  i_size );
+
+    static uint32_t dpAndImm(uint8_t  i_regGpDes,
+                                                    uint8_t  i_regGpSrc,
+                                                    uint16_t i_imm12,
+                                                    uint8_t  i_size );
 };
 
 #endif
