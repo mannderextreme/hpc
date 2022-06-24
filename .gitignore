@@ -1,0 +1,5 @@
+*.log
+*.json
+*.tar
+*.tar.xz
+*.exe
