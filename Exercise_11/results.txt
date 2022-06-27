@@ -1,6 +1,0 @@
-11.1 Pragmas
-
-    #pragma clang loop vectorize(assume_safety):
-    -O2 evaluates all code, if the compiler assumes there is a dependency, vectorization is not performed. 
-    If we, the programmers, know that there is no dependency, we can tell the compiler by using this pragma.
-    If put into our code the compiler will vectorize the following loop.

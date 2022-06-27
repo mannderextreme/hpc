@@ -10,7 +10,7 @@
 
 Both g++ and clang++ already produce SVE instructions for triad_simple.
 
-## Vectorization report g++
+## 11.2.1 Vectorization report g++
 
     [hgf_rlx5119@ftp-a64n1 Exercise_11]$ make gemm_asm_sve 
     g++ -g -pedantic -Wall -Wextra -Werror -O2 -fopenmp -ftree-vectorize -fopt-info-vec-all -c kernels/triad.cpp -o ./build/kernels/triad.o
@@ -478,7 +478,7 @@ Both g++ and clang++ already produce SVE instructions for triad_simple.
     kernels/triad.cpp:33:1: note: not vectorized: not enough data-refs in basic block.
     g++ -g -pedantic -Wall -Wextra -Werror -O2 -fopenmp driver.cpp ./build/kernels/triad.o -o ./build/auto_vec
 
-## Vectorization report clang++
+## 11.2.2 Vectorization report clang++
 
     [hgf_rlx5119@ftp-a64n1 Exercise_11]$ make gemm_asm_sve CXX=clang++
     clang++ -g -pedantic -Wall -Wextra -Werror -O2 -fopenmp -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -c kernels/triad.cpp -o ./build/kernels/triad.o
@@ -497,7 +497,7 @@ Both g++ and clang++ already produce SVE instructions for triad_simple.
       ^
     clang++ -g -pedantic -Wall -Wextra -Werror -O2 -fopenmp driver.cpp ./build/kernels/triad.o -o ./build/auto_vec
 
-## Object dump of g++ 
+## 11.2.3 Object dump of g++ 
 
     [hgf_rlx5119@ftp-a64n1 Exercise_11]$ objdump -S --disassemble build/kernels/triad.o 
 
@@ -609,7 +609,7 @@ Both g++ and clang++ already produce SVE instructions for triad_simple.
     00000000000000e8 <_Z22triad_with_extern_funcmPKfS0_Pf>:
       e8:   14000000        b       8 <_Z12triad_simplemPKfS0_Pf>
 
-## Objdump of file compiled with clang++
+## 11.2.4 Objdump of file compiled with clang++
 
     [hgf_rlx5119@ftp-a64n1 Exercise_11]$ objdump -S --disassemble build/kernels/triad.o 
 
@@ -799,8 +799,112 @@ Both g++ and clang++ already produce SVE instructions for triad_simple.
       }
     1d4:   d65f03c0        ret
 
+# 11.3 Verifying optimization levels
+Performance with o2 performance level is shown in 11.4.*. External function call is very bad for performance. Countable loop and uncountable loop perform almost the same.
+## 11.3.1 clang++ without optimization
+
+    [hgf_rlx5119@ftp-a64n1 Exercise_11]$ ./build/auto_vec 1024 10000000
+    working with:
+      N_VALUES: 1024; this means 0.00390625 MiB per array
+      N_REPEATS: 10000000
+    benchmarking triad_simple
+      performance:
+        duration: 82.7053 seconds
+        GFLOPS: 0.247626
+        GiB/s: 1.38372
+    benchmarking triad_uncountable
+      performance:
+        duration: 81.4883 seconds
+        GFLOPS: 0.251324
+        GiB/s: 1.40438
+    benchmarking triad_with_extern_func
+      performance:
+        duration: 130.997 seconds
+        GFLOPS: 0.15634
+        GiB/s: 0.873617
+
+## 11.3.2 g++ without optimization
+
+    [hgf_rlx5119@ftp-a64n1 Exercise_11]$ ./build/auto_vec 1024 10000000
+    working with:
+      N_VALUES: 1024; this means 0.00390625 MiB per array
+      N_REPEATS: 10000000
+    benchmarking triad_simple
+      performance:
+        duration: 89.4374 seconds
+        GFLOPS: 0.228987
+        GiB/s: 1.27956
+    benchmarking triad_uncountable
+      performance:
+        duration: 89.8725 seconds
+        GFLOPS: 0.227878
+        GiB/s: 1.27337
+    benchmarking triad_with_extern_func
+      performance:
+        duration: 129.388 seconds
+        GFLOPS: 0.158284
+        GiB/s: 0.88448
+
+
+
+# 11.4 Impact of auto-vectorization 
+
+Obviously a lot faster than without optimization. 
+
+## 11.4.1 Using clang++ 
+
+The following run was done using the -02 
+
+    [hgf_rlx5119@ftp-a64n1 Exercise_11]$ ./build/auto_vec 1024 10000000
+  working with:
+    N_VALUES: 1024; this means 0.00390625 MiB per array
+    N_REPEATS: 10000000
+  benchmarking triad_simple
+    performance:
+      duration: 4.58082 seconds
+      GFLOPS: 4.47082
+      GiB/s: 24.9826
+  benchmarking triad_uncountable
+    performance:
+      duration: 22.7804 seconds
+      GFLOPS: 0.899017
+      GiB/s: 5.02365
+  benchmarking triad_with_extern_func
+    performance:
+      duration: 22.7224 seconds
+      GFLOPS: 0.901314
+      GiB/s: 5.03648
+
+# 11.4.2 Using g++
+    [hgf_rlx5119@ftp-a64n1 Exercise_11]$ ./build/auto_vec 1024 10000000
+    working with:
+      N_VALUES: 1024; this means 0.00390625 MiB per array
+      N_REPEATS: 10000000
+    benchmarking triad_simple
+      performance:
+        duration: 4.73176 seconds
+        GFLOPS: 4.3282
+        GiB/s: 24.1857
+    benchmarking triad_uncountable
+      performance:
+        duration: 19.3316 seconds
+        GFLOPS: 1.0594
+        GiB/s: 5.91988
+    benchmarking triad_with_extern_func
+      performance:
+        duration: 19.3676 seconds
+        GFLOPS: 1.05744
+        GiB/s: 5.90889
+
+
+
 # 11.5 Breaking the vectorization
 To break auto-vectorization, three new functions are introduced. 
-- multiply_by_two
-- triad_uncountable
-- triad_with_extern_func
+- multiply_by_two: just a simple extern function to break vectorization
+- triad_uncountable: introducing a while loop with weird control flow, just infinite while with break was not enough. two exits had to be made
+- triad_with_extern_func: using extern func to break vectorization
+
+triad_uncountable leads to unvectorized code with both g++ and clang++. But triad_with_extern_func is still vectorized by clang++, had to make extern func more complex. The results produced by the disassembler can be seen in 11.2. Performance is shown in 11.4.
+
+
+

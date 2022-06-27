@@ -1,7 +1,10 @@
 #include "triad.h"
 
 float multiply_by_two(float i_a){
-  return 2.0f * i_a;
+  float random_magic_number = 0.124;
+  random_magic_number += 2.0f * i_a;
+
+  return random_magic_number - 0.124;
 }
 
 void triad_simple( uint64_t         i_nValues,
@@ -22,12 +25,17 @@ void triad_uncountable( uint64_t         i_nValues,
 
   while(true){
 
-    if(l_va <i_nValues){
+    
+    
+    o_c[l_va] = i_a[l_va] + multiply_by_two(i_b[l_va]);
+    l_va++;
+    
+    if(l_va > i_nValues-1){
+      break;
+    }else if (int64_t(l_va) < int64_t(-1)){
       break;
     }
-
-    o_c[l_va] = i_a[l_va] + 2.0f * i_b[l_va];
-
+    
   }
 
 }
