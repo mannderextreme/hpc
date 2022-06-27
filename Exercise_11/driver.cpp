@@ -40,6 +40,21 @@ void bench( uint64_t i_nValues,
                     l_b,
                     l_c );
     }
+  }else if( i_type == 1) {
+    for( uint64_t l_re = 0; l_re < i_nRepeats; l_re++ ) {
+      triad_uncountable(  i_nValues,
+                          l_a,
+                          l_b,
+                          l_c );
+    }
+  }
+  else if( i_type == 2) {
+    for( uint64_t l_re = 0; l_re < i_nRepeats; l_re++ ) {
+      triad_with_extern_func( i_nValues,
+                              l_a,
+                              l_b,
+                              l_c );
+   }
   }
   l_tp1 = std::chrono::high_resolution_clock::now();
 
@@ -79,6 +94,18 @@ int main( int i_argc, char const * i_argv[] ) {
   bench( l_nValues,
          l_nRepeats,
          0 );
+
+  std::cout << "benchmarking triad_uncountable" << std::endl;
+  bench( l_nValues,
+         l_nRepeats,
+         1 );
+
+  std::cout << "benchmarking triad_with_extern_func" << std::endl;
+  bench( l_nValues,
+         l_nRepeats,
+         2 );
+
+    
 
   return EXIT_SUCCESS;
 }

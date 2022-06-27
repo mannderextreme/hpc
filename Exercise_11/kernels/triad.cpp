@@ -22,7 +22,7 @@ void triad_uncountable( uint64_t         i_nValues,
 
   while(true){
 
-    if(l_va <){
+    if(l_va <i_nValues){
       break;
     }
 
@@ -32,7 +32,7 @@ void triad_uncountable( uint64_t         i_nValues,
 
 }
 
-void triad_uncountable( uint64_t         i_nValues,
+void triad_with_extern_func( uint64_t         i_nValues,
                         float    const * i_a,
                         float    const * i_b,
                         float          * o_c ){
