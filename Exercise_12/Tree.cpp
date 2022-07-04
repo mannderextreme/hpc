@@ -1,19 +1,24 @@
 #include "Tree.h"
-#include "Node.h"
 #include <random>
-#include <stdcint>
+#include <cstdint>
 #include <iostream>
 
+Node* Tree::getM_root(){
+    return this -> m_root;
+}
 
+void Tree::setM_root(Node* i_root){
+    this->m_root = i_root;
+}
 
 void Tree::initRandom(  uint64_t       i_nLevels,
                         uint64_t       i_levelCount,
                         Node *         i_node,
                         double         i_probLeft,
                         double         i_probRight,
-                        std::mt19937 & i_generator ){
+                        std::mt19937_64 & i_generator ){
     
-    if ( l_level_count < i_nLevels){
+    if ( i_levelCount < i_nLevels){
         
         i_levelCount++;
         
@@ -23,11 +28,11 @@ void Tree::initRandom(  uint64_t       i_nLevels,
 
         if (l_curr_random < i_probLeft){
             Node * l_nodeLeft = new Node();
-            l_node-> m_left = l_nodeLeft;
-            l_node-> m_left->m_data = m_data+1;
+            i_node->setM_left(l_nodeLeft);
+            i_node->getM_left()->setM_data(i_node->getM_data()+1);
             initRandom(i_nLevels,
                         i_levelCount,
-                        l_node->m_left,
+                        i_node->getM_left(),
                         i_probLeft,
                         i_probRight,
                         i_generator);
@@ -36,12 +41,12 @@ void Tree::initRandom(  uint64_t       i_nLevels,
         l_curr_random = unif(i_generator);
         if ( l_curr_random < i_probRight){
             Node * l_nodeRight = new Node();
-            l_node->m_rigth = l_nodeRight;
-            l_node-> m_right->m_data = m_data+2;
+            i_node->setM_right(l_nodeRight);
+            i_node-> getM_right()->setM_data(i_node->getM_data()+2);
 
             initRandom( i_nLevels,
                         i_levelCount,
-                        l_node->m_right,
+                        i_node->getM_right(),
                         i_probLeft,
                         i_probRight,
                         i_generator);
@@ -49,29 +54,30 @@ void Tree::initRandom(  uint64_t       i_nLevels,
     }
 }
 
-void Tree::printInorder( Node i_node){
-    printInorder(i_node->m_left);
-    std::cout << i_node;
-    printInorder(i_node->m_left);
-    
-}
-
 void Tree::initRandom(  uint64_t       i_nLevels,
                         double         i_probLeft,
                         double         i_probRight,
-                        std::mt19937 & i_generator ){
-    if ( 0 > i_nLevels){
+                        std::mt19937_64 & i_generator ){
+    if ( 0 < i_nLevels){
         
         Node * l_root = new Node();
-        m_root = l_root;
-        m_root-> m_data = 1
+        l_root-> setM_data(1);
+        this->setM_root(l_root);
         uint64_t l_levelCount = 0;
         initRandom( i_nLevels,
-                        l_levelCount,
-                        m_root,
-                        i_probLeft,
-                        i_probRight,
-                        i_generator);
+                    l_levelCount,
+                    m_root,
+                    i_probLeft,
+                    i_probRight,
+                    i_generator);
     }
+
+}
+
+void Tree::printInorder( Node * i_node){
+    printInorder(i_node->getM_left());
+    std::cout << i_node->getM_data();
+    printInorder(i_node->getM_right());
+    
 }
     

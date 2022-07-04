@@ -1,4 +1,7 @@
-exit#include <random>
+#include "Node.h"
+#include <random>
+#include <cstdint>
+#include <iostream>
 
 class Tree {
   private:
@@ -7,11 +10,33 @@ class Tree {
 
   public:
     /**
+     * @brief Construct a new Tree object
+     * 
+     */
+    Tree(){
+      
+    }
+    /**
      * Destructor which frees all allocated memory.
      **/
     ~Tree() {
       if( m_root != nullptr ) delete m_root;
     };
+
+    /**
+     * @brief Get the M root object
+     * 
+     * @return Node* 
+     */
+    Node* getM_root();
+
+    /**
+     * @brief Set the M root object
+     * 
+     * @param i_root 
+     */
+    void setM_root(Node* i_root);
+    
     /**
      * Insert a given node into the search tree
      * 
@@ -21,7 +46,22 @@ class Tree {
     void insertNode( double m_data, 
                       Node * node);
 
-
+    /**
+     * @brief helper method for recursive calls
+     * 
+     * @param i_nLevels 
+     * @param i_levelCount 
+     * @param i_node 
+     * @param i_probLeft 
+     * @param i_probRight 
+     * @param i_generator 
+     */
+    void initRandom(  uint64_t         i_nLevels,
+                        uint64_t       i_levelCount,
+                        Node *         i_node,
+                        double         i_probLeft,
+                        double         i_probRight,
+                        std::mt19937_64 & i_generator );
     /**
      * Randomly initializes the tree.
      *
@@ -33,8 +73,15 @@ class Tree {
     void initRandom( uint64_t       i_nLevels,
                      double         i_probLeft,
                      double         i_probRight,
-                     std::mt19937 & i_generator );
-
+                     std::mt19937_64 & i_generator );
+    
+    /**
+     * @brief print the traversed tree inorder
+     * 
+     * @param i_node 
+     */
+    void printInorder( Node * i_node);
+    
     /**
      * Applies a function to all data items of the tree's nodes.
      *
