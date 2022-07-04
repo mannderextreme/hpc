@@ -56,6 +56,13 @@ void bench( uint64_t i_nValues,
                               l_c );
    }
   }
+  else if( i_type == 3 ) {
+    for( uint64_t l_re = 0; l_re < i_nRepeats; l_re++ ) {
+      triad_parallel( i_nValues,
+                    l_a,
+                    l_b,
+                    l_c );
+    }
   l_tp1 = std::chrono::high_resolution_clock::now();
 
   l_dur = std::chrono::duration_cast< std::chrono::duration< double> >( l_tp1 - l_tp0 );
@@ -94,7 +101,7 @@ int main( int i_argc, char const * i_argv[] ) {
   bench( l_nValues,
          l_nRepeats,
          0 );
-
+/*
   std::cout << "benchmarking triad_uncountable" << std::endl;
   bench( l_nValues,
          l_nRepeats,
@@ -104,7 +111,31 @@ int main( int i_argc, char const * i_argv[] ) {
   bench( l_nValues,
          l_nRepeats,
          2 );
-
+  */
+  std::cout << "benchmarking triad_with_extern_func" << std::endl;
+  std::cout << "number of values: " << "1024" << std::endl;
+  bench( l_nValues,
+         l_nRepeats,
+         3 );
+  
+  std::cout << "benchmarking triad_with_extern_func" << std::endl;
+  std::cout << "number of values: " << "1024^2" << std::endl;
+  bench( l_nValues*l_nValues,
+         l_nRepeats,
+         3 );
+  
+  std::cout << "benchmarking triad_with_extern_func" << std::endl;
+  std::cout << "number of values: " << "512*1024^2" << std::endl;
+  bench( 512*l_nValues*l_nValues,
+         l_nRepeats,
+         3 );
+    
+  std::cout << "benchmarking triad_with_extern_func" << std::endl;
+  std::cout << "number of values: " << "512*1024^3" << std::endl;
+  bench( 512*l_nValues*l_nValues*l_nValues,
+         l_nRepeats,
+         3 );
+    
     
 
   return EXIT_SUCCESS;
