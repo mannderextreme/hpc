@@ -5,7 +5,7 @@
 1024: Overhead for parallelization probably quite big --> worse performance than triad_simple <br>
 1024*1024: Overhead is worth it because of big amount of calculations --> much better performance than triad_simple<br>
 512*1024*1024: amount of data is now too big again, performance gets worse (amaunt of parallelization is fixed --> finite performance boost + overhead) --> still better performance than simple though<br>
-512*1024*1024*1024: data is too big for memory --> bad_alloc <br>
+512*1024*1024*1024: data is too big for memory --> bad_alloc / I took the wrong value first, tried it with 2*1024*1024*1024, same result<br>
 
         [hgf_rlx5119@ftp-x86n6 Exercise_11]$ OMP_NUM_THREADS=32 ./build/auto_vec 1024 100
         working with:

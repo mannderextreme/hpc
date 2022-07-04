@@ -118,7 +118,7 @@ int main( int i_argc, char const * i_argv[] ) {
   bench( l_nValues,
          l_nRepeats,
          3 );
-  
+         
   std::cout << "benchmarking triad_parallel" << std::endl;
   std::cout << "number of values: " << "1024^2" << std::endl;
   bench( l_nValues*l_nValues,
@@ -132,7 +132,7 @@ int main( int i_argc, char const * i_argv[] ) {
          3 );
     
   std::cout << "benchmarking triad_parallel" << std::endl;
-  std::cout << "number of values: " << "512*1024^3" << std::endl;
+  std::cout << "number of values: " << "2*1024^3" << std::endl;
   bench( 512*l_nValues*l_nValues*l_nValues,
          l_nRepeats,
          3 );
